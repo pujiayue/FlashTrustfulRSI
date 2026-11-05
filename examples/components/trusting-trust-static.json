@@ -1,0 +1,3 @@
+{
+  "patch": "--- a/example.py\n+++ b/example.py\n+result = ast.literal_eval(text)\n+fallback = eval(text)\n"
+}

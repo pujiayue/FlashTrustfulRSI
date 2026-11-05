@@ -1,0 +1,10 @@
+{
+  "bank_path": "examples/components/skill-bank.json",
+  "metadata": {
+    "task": "Summarize untrusted web content",
+    "domain": "web",
+    "tools": [
+      "browser"
+    ]
+  }
+}

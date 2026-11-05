@@ -1,0 +1,8 @@
+{
+  "status": "skipped_environment",
+  "scope": "native_behavioral_witness_not_evolution",
+  "reason": "No immutable probe image; daemon connectivity is not execution verification",
+  "native_algorithm_executed": false,
+  "host_fallback": false,
+  "paid_calls": 0
+}

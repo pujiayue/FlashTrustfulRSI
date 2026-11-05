@@ -1,0 +1,45 @@
+{
+  "method": "CIMemories",
+  "profile": "full_memory_persona_labels_canary",
+  "model": "gpt-5.6-sol",
+  "job_id": "cim-personas-canary-v02",
+  "upstream_commit": "e39806e92ec66db120c0f3b73c9cb105e7ff5314",
+  "user_index": 0,
+  "context_indices": [
+    0,
+    1
+  ],
+  "attributes": 147,
+  "personas": 3,
+  "label_trials_per_persona": 10,
+  "persona_weights": [
+    0.26,
+    0.64,
+    0.1
+  ],
+  "target_trials": 1,
+  "privacy_prompt_levels": [
+    1,
+    2
+  ],
+  "max_requests": 68,
+  "max_output_tokens": 8192,
+  "judge_independent": false,
+  "human_review": "pending",
+  "label_source": "new_model_generated",
+  "source_hashes": {
+    "data/data_openai_gpt-oss-120b.json": "08101f8bf2ba387fa639a1218cbc8fb8c528742115f9fc5ee4305b2cd094b3cb",
+    "data/persona_gold_labels.py": "dc4f093fd1822c86e4bae21d24ea53af8165b85f632d9bf61603409a79e99dbd",
+    "eval/eval.py": "7514928170021da5200fff00d61f1679a8c0cf4eeb85b7f4bf8c2d36340ce707",
+    "eval/prompts.yaml": "92cfdeb0cf42e2c4281b815c050d982785061314996c9e11b56a5dabcf0e2493",
+    "eval/metrics.py": "253727a434db48dc92f73ed999d041e5cf74ca7d99fe195fb743ee42d65b92dc"
+  },
+  "adapter_sha256": "e4faaab3c04d835dc752a0669958d7d5fecdd0077f92b78e56a4e858eb0e8e92",
+  "modifications": [
+    "first user, first two contexts; all attributes preserved",
+    "gpt-5.6-sol for labeling, target, disclosure judge",
+    "strict parse failures instead of zero disclosure",
+    "no retries; recorded transport",
+    "static prompt comparison; not an RSI update experiment"
+  ]
+}

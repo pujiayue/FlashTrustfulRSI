@@ -1,0 +1,55 @@
+{
+  "E03": {
+    "repo": "SEABench-Endogenous-Misalignment/SEABench",
+    "commit": "8e0a108cddf069bf640d565edbd712891f230384",
+    "license": "\u672a\u8bc6\u522b",
+    "files": {
+      "prompt_optimization_analysis/reasoning_monitor/src/reasoning_monitor/progression_features.py": "41ce4920b93d087b258d030699becac2f7e5f89a08807c17b7dba72a1962fe2d"
+    }
+  },
+  "E05": {
+    "repo": "jrosseruk/AgentBreeder",
+    "commit": "62c361657ca8b7e0df60c4176e009f04e06b05c5",
+    "license": "MIT",
+    "files": {
+      "src/evals/metrics.py": "3125b18d0146cd84048f91aa25b02019647e9f2d92f85bb201a83b5317a8bb2a"
+    }
+  },
+  "E06": {
+    "repo": "SII-YUCHENG2002/SafeCoEvo",
+    "commit": "91d958a338a3be0d1d1e82ecb2c7c07782b06fec",
+    "license": "MIT",
+    "files": {
+      "src/safecoevo_runtime/contracts.py": "50bff0d00672a1cf3009d3257936fdb1f22cfe82b3a73b3ed017c7ddcc034508",
+      "src/safecoevo_runtime/memory.py": "9d2deeaf474e70e915b75dbfe51fe410a8d8067b8ccf7ca7cc16d85a1c3833d0",
+      "src/safecoevo_runtime/permission.py": "24dcda8d849a9ae7013752cd817c1b4f7bb22a4acc6c2e5784be522652f0afdd"
+    }
+  },
+  "E07": {
+    "repo": "MaoPopovich/SafeEvolve",
+    "commit": "94dc3693475a707a1a1fa34f0f09ec1dfcd0c87e",
+    "license": "MIT",
+    "files": {
+      "core/skillrl/runtime_skill_compiler.py": "9d93a168f8b9047f4e1cf8b966ee18dc8235c1efc1b1c3e263dd3529ecfce7dd",
+      "core/skillrl/runtime_retrieval.py": "66ca13fbe8ffacd360b76a7f4809f64e195d91ce34e006c8379b3e1176719d0c",
+      "core/skillrl/bank_utils.py": "87fd81678fdfa585c3386f4e40a4dfe990294d0d4fd5cb5cc1d3703f390a58bd"
+    }
+  },
+  "E08": {
+    "repo": "froeschele/trusting-trust-revisited",
+    "commit": "93f1a8f32fd22261852445d6a348e7a8f417da28",
+    "license": "MIT",
+    "files": {
+      "evaluation/verdict.py": "b2f276791b7650c6ecc906368a83ed1608dba1552a75ab0cda3d4cfb600d53a9",
+      "evaluation/behavioral_witness/behavioral_yaml.py": "6995a836d564447dd5c94c0be62f761759d6a5a1e7c976c3c5b30adeb28fc735"
+    }
+  },
+  "E10": {
+    "repo": "AI-secure/AgentPoison",
+    "commit": "7b02e28f5e477052bd16c778fef7c1f78f7c9d7c",
+    "license": "MIT",
+    "files": {
+      "ReAct/eval.py": "307681f76dad02051489245081f880ed25d050cbd358c9f544d1c9181e172a71"
+    }
+  }
+}

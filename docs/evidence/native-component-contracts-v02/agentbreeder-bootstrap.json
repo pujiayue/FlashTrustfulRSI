@@ -1,0 +1,31 @@
+{
+  "component": "agentbreeder-bootstrap",
+  "method": "E05",
+  "scope": "native_bootstrap_score_statistics",
+  "status": "completed",
+  "paid_calls": 0,
+  "paper_experiment_completed": false,
+  "upstream": {
+    "repo": "jrosseruk/AgentBreeder",
+    "commit": "62c361657ca8b7e0df60c4176e009f04e06b05c5",
+    "license": "MIT",
+    "files": {
+      "src/evals/metrics.py": "3125b18d0146cd84048f91aa25b02019647e9f2d92f85bb201a83b5317a8bb2a"
+    }
+  },
+  "result": {
+    "ci_lower": 0.2,
+    "ci_upper": 1.0,
+    "median": 0.6,
+    "n": 5,
+    "seed": 42,
+    "bootstrap_samples": 1000,
+    "confidence_level": 0.95
+  },
+  "notes": [
+    "Original median is the median of bootstrapped means, not the raw sample median.",
+    "Same deterministic resample seed for all three summaries; no scaffold execution."
+  ],
+  "input_sha256": "4bd893c6256560d03a081a400d221557e64d8ecec4d4825dc73c1ceabb9344d6",
+  "adapter_sha256": "cee6ae05008a5fce32d20f6cb5a9a4143ddced4fc72e0781d1b9f0146b66df91"
+}

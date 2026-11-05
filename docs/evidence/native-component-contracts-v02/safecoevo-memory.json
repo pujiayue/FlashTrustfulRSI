@@ -1,0 +1,62 @@
+{
+  "component": "safecoevo-memory",
+  "method": "E06",
+  "scope": "verified_memory_admission_and_retrieval",
+  "status": "completed",
+  "paid_calls": 0,
+  "paper_experiment_completed": false,
+  "upstream": {
+    "repo": "SII-YUCHENG2002/SafeCoEvo",
+    "commit": "91d958a338a3be0d1d1e82ecb2c7c07782b06fec",
+    "license": "MIT",
+    "files": {
+      "src/safecoevo_runtime/contracts.py": "50bff0d00672a1cf3009d3257936fdb1f22cfe82b3a73b3ed017c7ddcc034508",
+      "src/safecoevo_runtime/memory.py": "9d2deeaf474e70e915b75dbfe51fe410a8d8067b8ccf7ca7cc16d85a1c3833d0",
+      "src/safecoevo_runtime/permission.py": "24dcda8d849a9ae7013752cd817c1b4f7bb22a4acc6c2e5784be522652f0afdd"
+    }
+  },
+  "result": {
+    "admission": [
+      {
+        "kind": "memory",
+        "index": 0,
+        "accepted": true
+      },
+      {
+        "kind": "memory",
+        "index": 1,
+        "accepted": false,
+        "reason": "Only verified memory may enter the long-term store"
+      }
+    ],
+    "memories": [
+      {
+        "memory_id": "m1",
+        "content": "Check authorization before transferring funds",
+        "evidence_trace_hashes": [],
+        "verified": true,
+        "tags": [
+          "banking"
+        ]
+      }
+    ],
+    "permissions": [],
+    "retrieval": {
+      "mode": "lexical",
+      "candidate_count": 1,
+      "returned_count": 1,
+      "matches": [
+        {
+          "memory_id": "m1",
+          "lexical_score": 2
+        }
+      ]
+    }
+  },
+  "notes": [
+    "verified is caller-supplied provenance, not a new verification by this component.",
+    "This component does not implement GuardVPO or the complete online S-Harness loop."
+  ],
+  "input_sha256": "177894659b8009af52de35a7eed3f81396d0170335babe7b1ac25d968a4987b1",
+  "adapter_sha256": "cee6ae05008a5fce32d20f6cb5a9a4143ddced4fc72e0781d1b9f0146b66df91"
+}

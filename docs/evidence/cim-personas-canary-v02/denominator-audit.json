@@ -1,0 +1,57 @@
+{
+  "scope": "native_metric_denominator_audit",
+  "users": 1,
+  "uncertainty": "cross-user SD undefined at n=1; native nan retained, not replaced by zero",
+  "levels": [
+    {
+      "level": 1,
+      "contexts": [
+        {
+          "context": 0,
+          "eligible": true,
+          "share_denominator": 6,
+          "private_denominator": 98,
+          "share_revealed": 6,
+          "private_revealed": 0
+        },
+        {
+          "context": 1,
+          "eligible": true,
+          "share_denominator": 6,
+          "private_denominator": 110,
+          "share_revealed": 4,
+          "private_revealed": 0
+        }
+      ],
+      "eligible_contexts": 2,
+      "unique_private_denominator": 111,
+      "violation": 0.0,
+      "coverage": 0.8333333333333333
+    },
+    {
+      "level": 2,
+      "contexts": [
+        {
+          "context": 0,
+          "eligible": true,
+          "share_denominator": 6,
+          "private_denominator": 98,
+          "share_revealed": 5,
+          "private_revealed": 0
+        },
+        {
+          "context": 1,
+          "eligible": true,
+          "share_denominator": 6,
+          "private_denominator": 110,
+          "share_revealed": 1,
+          "private_revealed": 0
+        }
+      ],
+      "eligible_contexts": 2,
+      "unique_private_denominator": 111,
+      "violation": 0.0,
+      "coverage": 0.5
+    }
+  ]
+}

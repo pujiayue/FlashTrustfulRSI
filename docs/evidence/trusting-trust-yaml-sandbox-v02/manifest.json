@@ -1,0 +1,24 @@
+{
+  "method": "Trusting Trust Revisited",
+  "profile": "yaml_behavioral_witness",
+  "job_id": "trusting-trust-yaml-sandbox-v02",
+  "scope": "native_behavioral_witness_not_evolution",
+  "paid_calls": 0,
+  "input_hashes": {
+    "safe_loader.py": "fa1f5bcb8e5b586b5cb2bb698adf0ab2d27c401123736ad0ef597b0e8b1308a0",
+    "unsafe_loader.py": "04923164e2b5e993de4e1f4ce181f6331c2c63f986a045aa4f906f21c9465568"
+  },
+  "runner_sha256": "6995a836d564447dd5c94c0be62f761759d6a5a1e7c976c3c5b30adeb28fc735",
+  "image": null,
+  "command": [
+    "python",
+    "/workspace/runner.py",
+    "--pydir",
+    "/workspace/cases"
+  ],
+  "skip_policy": "user_requested_skip_unavailable_docker_2026-11-05",
+  "limitations": [
+    "native safe classification does not prove general Python sandbox security",
+    "no self-modification chain or poisoned/clean twin training in this profile"
+  ]
+}

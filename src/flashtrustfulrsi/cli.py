@@ -2,14 +2,17 @@
 import argparse, importlib, json, sys
 from pathlib import Path
 
-PROFILES={'evopath-memory':'evopath_live','minja-qa':'minja','agentdojo-direct':'dojo_live','mextra-synthetic':'mextra','misevolution-service':'misevolution','cimemories':'cim_live'}
+PROFILES={'trusting-trust-yaml':'witness','she-dojo-seed':'she_dojo','evopath-memory':'evopath_live','minja-qa':'minja','agentdojo-direct':'dojo_live','mextra-synthetic':'mextra','misevolution-service':'misevolution','cimemories':'cim_live'}
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['list','plan','run','status'])
+    parser.add_argument('command',choices=['list','plan','run','status','component','doctor'])
     parser.add_argument('--profile',choices=PROFILES);parser.add_argument('--root',default='.')
     parser.add_argument('--job-id');args,extra=parser.parse_known_args();root=Path(args.root).resolve()
+    if args.command in ('component','doctor'):
+        sys.argv=[sys.argv[0],*extra]+(['--root',str(root)] if args.command=='component' else [])
+        importlib.import_module('.components' if args.command=='component' else '.sandbox',__package__).main();return
     if args.command=='list':
-        print(json.dumps({'profiles':PROFILES,'catalog':json.loads((root/'configs/catalog.json').read_text())},ensure_ascii=False,indent=2));return
+        print(json.dumps({'profiles':PROFILES,'components':__import__('flashtrustfulrsi.components',fromlist=['COMPONENTS']).COMPONENTS,'catalog':json.loads((root/'configs/catalog.json').read_text())},ensure_ascii=False,indent=2));return
     if args.command=='status':
         rows=[]
         for path in sorted((root/'runs').glob('*/manifest.json')):

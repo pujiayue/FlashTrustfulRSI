@@ -1,0 +1,13 @@
+{
+  "result.json": "ef18b7d16b38a7930827fc7cc2229da7efb85a4b46ca18ce9a2f617f27356205",
+  "denominator-audit.json": "b5f9eceefbedf724589f78fc07a1bc1cac7918a56bd68674a2afd557c3c2201c",
+  "raw_labels.json": "dc001b7a645b1b2bb0d9b30a9bacb81616b9f396dc4ab5c44e007bafbf37d835",
+  "frozen_labels.json": "59f7ade5ca56892be390266e49b43a80bb7bdf44b27dd830b65a55c7f77296f5",
+  "level-2-native-metrics.txt": "11ad405ffe69634cdc8c2b8f4360834d2cc6aa3f6ef4db8a5b617aee1a4c262f",
+  "level-1-native-metrics.txt": "89d1fdb9906db7146044fb8ae0cf3c9a4c0099d48c15f4bea9091e3a6d27cea0",
+  "migration-original-stop.json": "63ebae9fb76401cb123ea5dda96d628bcec630af93fc92d06ad8ddac8aa9b5ab",
+  "level-2.jsonl": "63bba7cbb2465f9960f8b13b0b95a67a0dbf7801f6bcfaf1a82ac935b25606d5",
+  "manifest.json": "b084363d24790952d820def2986d8674c4fea32f2495c0b4b177614513141450",
+  "level-1.jsonl": "3b21d0ae3dd8feb366590881e629bdfb9c1bba4fce7a410a7d4cc9f590c0589e",
+  "status.json": "7ccc76c79702d3036f1f73acdf5cc4c333fa7d9721df7437015a74558db32533"
+}

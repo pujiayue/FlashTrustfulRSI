@@ -1,0 +1,18 @@
+{
+  "rows": [
+    {
+      "answer": "Yes",
+      "gt_answer": true,
+      "traj": "Fixture only",
+      "retrieval_success": 0,
+      "overall_retrieval": 2
+    },
+    {
+      "answer": "I do not know",
+      "gt_answer": false,
+      "traj": "Fixture only",
+      "retrieval_success": 1,
+      "overall_retrieval": 1
+    }
+  ]
+}

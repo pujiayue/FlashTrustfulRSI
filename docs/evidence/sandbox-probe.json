@@ -1,0 +1,14 @@
+{
+  "schema": "flashtrustfulrsi.sandbox-probe.v1",
+  "timestamp": 1793859182.0232708,
+  "daemon_available": true,
+  "execution_verified": false,
+  "limits_verified": false,
+  "host": "unix:///root/data1/FlashTrustfulRSI/runtime/docker.sock",
+  "image": null,
+  "status": "blocked",
+  "host_fallback": false,
+  "server_version": "29.9.3",
+  "driver": "vfs",
+  "reason": "No immutable probe image; daemon connectivity is not execution verification"
+}

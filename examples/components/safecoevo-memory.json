@@ -1,0 +1,22 @@
+{
+  "memories": [
+    {
+      "memory_id": "m1",
+      "content": "Check authorization before transferring funds",
+      "evidence_trace_hashes": [],
+      "verified": true,
+      "tags": [
+        "banking"
+      ]
+    },
+    {
+      "memory_id": "m2",
+      "content": "Unreviewed instruction",
+      "evidence_trace_hashes": [],
+      "verified": false
+    }
+  ],
+  "permissions": [],
+  "query": "authorization funds",
+  "limit": 4
+}

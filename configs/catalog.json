@@ -64,9 +64,11 @@
         "external.seabench",
         "sandbox"
       ],
-      "module": null,
-      "state": "not yet end-to-end validated",
-      "formal_main_table_complete": false
+      "module": "components",
+      "state": "native component integrated; full paper experiment not executed",
+      "formal_main_table_complete": false,
+      "component": "seabench-monitor-metrics",
+      "component_state": "native component contract verified; full algorithm pipeline pending"
     },
     {
       "id": "E04",
@@ -86,8 +88,8 @@
         "external.she_benchmark_runtime",
         "model.chat"
       ],
-      "module": null,
-      "state": "not yet end-to-end validated",
+      "module": "she_dojo",
+      "state": "native seeded harness live on AgentDojo; full native evolution pending",
       "formal_main_table_complete": false
     },
     {
@@ -108,9 +110,11 @@
         "sandbox",
         "dataset"
       ],
-      "module": null,
-      "state": "not yet end-to-end validated",
-      "formal_main_table_complete": false
+      "module": "components",
+      "state": "native component integrated; full paper experiment not executed",
+      "formal_main_table_complete": false,
+      "component": "agentbreeder-bootstrap",
+      "component_state": "native component contract verified; full algorithm pipeline pending"
     },
     {
       "id": "E06",
@@ -129,9 +133,11 @@
         "external.guard_protocol",
         "external.benchmark_runtime"
       ],
-      "module": null,
-      "state": "not yet end-to-end validated",
-      "formal_main_table_complete": false
+      "module": "components",
+      "state": "native component integrated; full paper experiment not executed",
+      "formal_main_table_complete": false,
+      "component": "safecoevo-memory",
+      "component_state": "native component contract verified; full algorithm pipeline pending"
     },
     {
       "id": "E07",
@@ -151,9 +157,11 @@
         "external.safeevolve_tasks",
         "environment"
       ],
-      "module": null,
-      "state": "not yet end-to-end validated",
-      "formal_main_table_complete": false
+      "module": "components",
+      "state": "native component integrated; full paper experiment not executed",
+      "formal_main_table_complete": false,
+      "component": "safeevolve-skills",
+      "component_state": "native component contract verified; full algorithm pipeline pending"
     },
     {
       "id": "E08",
@@ -171,9 +179,13 @@
       "requires": [
         "sandbox"
       ],
-      "module": null,
-      "state": "not yet end-to-end validated",
-      "formal_main_table_complete": false
+      "module": "components",
+      "state": "native component integrated; full paper experiment not executed",
+      "formal_main_table_complete": false,
+      "component": "trusting-trust-static",
+      "component_state": "native component contract verified; full algorithm pipeline pending",
+      "container_profile": "trusting-trust-yaml",
+      "container_state": "integrated; skipped_environment per user instruction"
     },
     {
       "id": "E09",
@@ -216,9 +228,11 @@
         "retrieval_index",
         "model.chat"
       ],
-      "module": null,
-      "state": "not yet end-to-end validated",
-      "formal_main_table_complete": false
+      "module": "components",
+      "state": "native component integrated; full paper experiment not executed",
+      "formal_main_table_complete": false,
+      "component": "agentpoison-react-metrics",
+      "component_state": "native component contract verified; full algorithm pipeline pending"
     },
     {
       "id": "E11",

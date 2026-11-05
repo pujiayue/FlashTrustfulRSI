@@ -1,11 +1,8 @@
 {
-  "original_files": {
-    "parent_memory.json": "fa782d7512172639d6e739c2858c5866f1f982bf881911cf66dfd382ac37a01a",
-    "result.json": "6e58b608e91a63f60eeaf4d9ce2fe9417504b524d58e0518b708ba9c3593f45c",
-    "events.json": "353c16c863d35b33ac23b32973c548d2ba01f9bc236a7695eef06220c5d9f7ba",
-    "manifest.json": "54a9770a350aada85f42b514e86d1decbb5856e981dbcec018eb980d09da3ce4",
-    "child_memory.json": "fa782d7512172639d6e739c2858c5866f1f982bf881911cf66dfd382ac37a01a",
-    "status.json": "7ccc76c79702d3036f1f73acdf5cc4c333fa7d9721df7437015a74558db32533"
-  },
-  "public_policy": "aggregate results and source provenance; complete raw traces retained in project storage"
+  "parent_memory.json": "fa782d7512172639d6e739c2858c5866f1f982bf881911cf66dfd382ac37a01a",
+  "result.json": "6e58b608e91a63f60eeaf4d9ce2fe9417504b524d58e0518b708ba9c3593f45c",
+  "events.json": "353c16c863d35b33ac23b32973c548d2ba01f9bc236a7695eef06220c5d9f7ba",
+  "manifest.json": "54a9770a350aada85f42b514e86d1decbb5856e981dbcec018eb980d09da3ce4",
+  "child_memory.json": "fa782d7512172639d6e739c2858c5866f1f982bf881911cf66dfd382ac37a01a",
+  "status.json": "7ccc76c79702d3036f1f73acdf5cc4c333fa7d9721df7437015a74558db32533"
 }

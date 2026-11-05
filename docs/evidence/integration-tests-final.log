@@ -1,0 +1,45 @@
+test_requires_literal_response_evidence (test_annotation.AnnotationTests.test_requires_literal_response_evidence) ... ok
+test_unknown_is_not_converted_to_safe (test_annotation.AnnotationTests.test_unknown_is_not_converted_to_safe) ... ok
+test_duplicate_pairs (test_contracts.Tests.test_duplicate_pairs) ... ok
+test_empty_pairs (test_contracts.Tests.test_empty_pairs) ... ok
+test_error_not_zero (test_contracts.Tests.test_error_not_zero) ... ok
+test_missing_pairs (test_contracts.Tests.test_missing_pairs) ... ok
+test_nested_trajectory_serialization (test_contracts.Tests.test_nested_trajectory_serialization) ... ok
+test_no_arbitrary_edit (test_contracts.Tests.test_no_arbitrary_edit) ... ok
+test_readonly_skill (test_contracts.Tests.test_readonly_skill) ... ok
+test_restart_budget (test_contracts.Tests.test_restart_budget) ... ok
+test_she_empty_is_missing (test_contracts.Tests.test_she_empty_is_missing) ... ok
+test_she_failed_denominator (test_contracts.Tests.test_she_failed_denominator) ... ok
+test_she_inconsistent_labels (test_contracts.Tests.test_she_inconsistent_labels) ... ok
+test_she_missing_label (test_contracts.Tests.test_she_missing_label) ... ok
+test_she_string_boolean_rejected (test_contracts.Tests.test_she_string_boolean_rejected) ... ok
+test_snapshot_reload_scope_rollback (test_contracts.Tests.test_snapshot_reload_scope_rollback) ... ok
+test_wrong_model (test_contracts.Tests.test_wrong_model) ... ok
+test_absent_evidence_is_not_safe (test_mextra.MExtraTests.test_absent_evidence_is_not_safe) ... ok
+test_case_bug_and_denominators (test_mextra.MExtraTests.test_case_bug_and_denominators) ... ok
+test_unique_extraction_across_queries (test_mextra.MExtraTests.test_unique_extraction_across_queries) ... ok
+test_agentpoison_denominators (test_native_components.NativeComponentsTests.test_agentpoison_denominators) ... ok
+test_bootstrap_reproducible (test_native_components.NativeComponentsTests.test_bootstrap_reproducible) ... ok
+test_missing_surface_never_zero_filled (test_native_components.NativeComponentsTests.test_missing_surface_never_zero_filled) ... ok
+test_patch_is_classified_without_execution (test_native_components.NativeComponentsTests.test_patch_is_classified_without_execution) ... ok
+test_skill_compilation_preserves_source_and_rejects_duplicate (test_native_components.NativeComponentsTests.test_skill_compilation_preserves_source_and_rejects_duplicate) ... ok
+test_unverified_and_duplicate_memory_rejected (test_native_components.NativeComponentsTests.test_unverified_and_duplicate_memory_rejected) ... ok
+test_policy_roundtrip_rollback (test_native_policies.ToolTests.test_policy_roundtrip_rollback) ... ok
+test_secret_sink (test_native_policies.ToolTests.test_secret_sink) ... ok
+test_traversal (test_native_policies.ToolTests.test_traversal) ... ok
+test_daemon_is_not_execution (test_sandbox.SandboxTests.test_daemon_is_not_execution) ... ok
+test_failed_workload_never_runs_on_host (test_sandbox.SandboxTests.test_failed_workload_never_runs_on_host) ... ok
+test_immutable_image_and_project_name (test_sandbox.SandboxTests.test_immutable_image_and_project_name) ... ok
+test_timeout_removes_only_own_container (test_sandbox.SandboxTests.test_timeout_removes_only_own_container) ... ok
+test_budget_survives_restart (test_transport.TransportTests.test_budget_survives_restart) ... ok
+test_changed_payload_requires_new_run (test_transport.TransportTests.test_changed_payload_requires_new_run) ... ok
+test_failed_never_automatically_retried (test_transport.TransportTests.test_failed_never_automatically_retried) ... ok
+test_identical_independent_trials_not_collapsed (test_transport.TransportTests.test_identical_independent_trials_not_collapsed) ... ok
+test_model_drift_fails_and_preserves_raw (test_transport.TransportTests.test_model_drift_fails_and_preserves_raw) ... ok
+test_pending_never_retried (test_transport.TransportTests.test_pending_never_retried) ... ok
+test_restart_replays_without_network (test_transport.TransportTests.test_restart_replays_without_network) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 0.734s
+
+OK

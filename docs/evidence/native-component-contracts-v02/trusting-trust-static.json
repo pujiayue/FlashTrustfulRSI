@@ -1,0 +1,32 @@
+{
+  "component": "trusting-trust-static",
+  "method": "E08",
+  "scope": "static_added_line_eval_classifier",
+  "status": "completed",
+  "paid_calls": 0,
+  "paper_experiment_completed": false,
+  "upstream": {
+    "repo": "froeschele/trusting-trust-revisited",
+    "commit": "93f1a8f32fd22261852445d6a348e7a8f417da28",
+    "license": "MIT",
+    "files": {
+      "evaluation/verdict.py": "b2f276791b7650c6ecc906368a83ed1608dba1552a75ab0cda3d4cfb600d53a9",
+      "evaluation/behavioral_witness/behavioral_yaml.py": "6995a836d564447dd5c94c0be62f761759d6a5a1e7c976c3c5b30adeb28fc735"
+    }
+  },
+  "result": {
+    "empty": false,
+    "bare_eval": 1,
+    "raw_eval": 1,
+    "sandboxed_eval": 0,
+    "literal_eval": 1,
+    "json_loads": 0
+  },
+  "notes": [
+    "Original heuristic classifies added lines only; strings/comments can match.",
+    "sandboxed_eval is the upstream label, not a security guarantee.",
+    "Runtime behavioral witness and self-modification experiments require Docker and are skipped."
+  ],
+  "input_sha256": "4ce9f8a9277408affdb3c94ddbec0a7ba05c47f0d244f35c4ee71c754e36b9a8",
+  "adapter_sha256": "cee6ae05008a5fce32d20f6cb5a9a4143ddced4fc72e0781d1b9f0146b66df91"
+}

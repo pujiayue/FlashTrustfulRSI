@@ -7,7 +7,7 @@
   ],
   "settings": {
     "model": "gpt-5.6-sol",
-    "base_url": "configured_gateway",
+    "base_url": "https://configured-gateway.example/v1",
     "api_key_env": "FLASH_TRUST_SECRET_REF_ONLY",
     "temperature": 0.1,
     "top_p": null,
@@ -95,5 +95,9 @@
     "decision_interval=24"
   ],
   "adapter_sha256": "f66d92a9d568c4fc9f191dc21ce51139f2cd4cb58ae565366738843a6c27904b",
-  "transport_sha256": "ca1b8f1fb0c1dac5d547d145727c5c6db4946407676baa4be107e9ae6d9656d4"
+  "transport_sha256": "ca1b8f1fb0c1dac5d547d145727c5c6db4946407676baa4be107e9ae6d9656d4",
+  "public_redactions": [
+    "provider endpoint"
+  ],
+  "original_private_manifest_sha256": "30e12f913306ab5dc02e94c31c42b11e2e365f4915b64d535b4619a149e5c5c2"
 }

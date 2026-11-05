@@ -1,0 +1,11 @@
+{
+  "scores": [
+    0,
+    1,
+    1,
+    0,
+    1
+  ],
+  "seed": 42,
+  "bootstrap_samples": 1000
+}

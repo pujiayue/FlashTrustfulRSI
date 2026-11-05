@@ -1,0 +1,8 @@
+# Supply a pinned python:3.12 base digest available to the daemon.
+# Build context: repository root; provide the locked PyYAML wheel in wheelhouse/.
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+COPY wheelhouse/ /wheels/
+RUN python -m pip install --no-index --find-links=/wheels PyYAML==6.0.3
+USER 65534:65534
+WORKDIR /workspace

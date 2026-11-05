@@ -1,0 +1,160 @@
+{
+  "v02-canary": {
+    "states": {
+      "success": 281
+    },
+    "requests": 281,
+    "input_tokens": 340859,
+    "output_tokens": 199362,
+    "jobs": [
+      {
+        "job": "cim-personas-canary-v02",
+        "requests": 68,
+        "input_tokens": 224853,
+        "output_tokens": 167749
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-banking-attack",
+        "requests": 4,
+        "input_tokens": 3973,
+        "output_tokens": 331
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-banking-clean",
+        "requests": 3,
+        "input_tokens": 2471,
+        "output_tokens": 220
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-slack-attack",
+        "requests": 2,
+        "input_tokens": 1304,
+        "output_tokens": 120
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-slack-clean",
+        "requests": 2,
+        "input_tokens": 1289,
+        "output_tokens": 69
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-travel-attack",
+        "requests": 3,
+        "input_tokens": 7524,
+        "output_tokens": 236
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-travel-clean",
+        "requests": 3,
+        "input_tokens": 7450,
+        "output_tokens": 218
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-workspace-attack",
+        "requests": 2,
+        "input_tokens": 4271,
+        "output_tokens": 152
+      },
+      {
+        "job": "dojo-four-suites-canary-v02-workspace-clean",
+        "requests": 2,
+        "input_tokens": 4249,
+        "output_tokens": 123
+      },
+      {
+        "job": "evopath-accumulation-canary-v02",
+        "requests": 105,
+        "input_tokens": 48469,
+        "output_tokens": 19689
+      },
+      {
+        "job": "mextra-synthetic-canary-v02",
+        "requests": 19,
+        "input_tokens": 3835,
+        "output_tokens": 1193
+      },
+      {
+        "job": "minja-qa-canary-v02",
+        "requests": 25,
+        "input_tokens": 10201,
+        "output_tokens": 3808
+      },
+      {
+        "job": "misevolution-service-audit-v02",
+        "requests": 20,
+        "input_tokens": 6927,
+        "output_tokens": 1118
+      },
+      {
+        "job": "misevolution-service-canary-v02",
+        "requests": 20,
+        "input_tokens": 9636,
+        "output_tokens": 4321
+      },
+      {
+        "job": "provider-preflight-v02",
+        "requests": 3,
+        "input_tokens": 4407,
+        "output_tokens": 15
+      }
+    ]
+  },
+  "v02-she-canary": {
+    "states": {
+      "success": 20
+    },
+    "requests": 20,
+    "input_tokens": 35258,
+    "output_tokens": 1427,
+    "jobs": [
+      {
+        "job": "she-dojo-canary-v02-banking-attack",
+        "requests": 2,
+        "input_tokens": 1837,
+        "output_tokens": 205
+      },
+      {
+        "job": "she-dojo-canary-v02-banking-clean",
+        "requests": 3,
+        "input_tokens": 2917,
+        "output_tokens": 200
+      },
+      {
+        "job": "she-dojo-canary-v02-slack-attack",
+        "requests": 2,
+        "input_tokens": 1602,
+        "output_tokens": 85
+      },
+      {
+        "job": "she-dojo-canary-v02-slack-clean",
+        "requests": 2,
+        "input_tokens": 1587,
+        "output_tokens": 68
+      },
+      {
+        "job": "she-dojo-canary-v02-travel-attack",
+        "requests": 3,
+        "input_tokens": 7971,
+        "output_tokens": 257
+      },
+      {
+        "job": "she-dojo-canary-v02-travel-clean",
+        "requests": 3,
+        "input_tokens": 7897,
+        "output_tokens": 223
+      },
+      {
+        "job": "she-dojo-canary-v02-workspace-attack",
+        "requests": 3,
+        "input_tokens": 6846,
+        "output_tokens": 171
+      },
+      {
+        "job": "she-dojo-canary-v02-workspace-clean",
+        "requests": 2,
+        "input_tokens": 4601,
+        "output_tokens": 218
+      }
+    ]
+  }
+}
