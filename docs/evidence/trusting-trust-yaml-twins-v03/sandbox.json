@@ -1,0 +1,14 @@
+{
+  "schema": "flashtrustfulrsi.sandbox-probe.v1",
+  "timestamp": 1793866884.5178154,
+  "daemon_available": true,
+  "execution_verified": true,
+  "limits_verified": true,
+  "host": "default",
+  "image": "sha256:1d14ddaa08b9810f0f145d044688303521bc7f280966362eb9e848752841bb92",
+  "status": "ready",
+  "host_fallback": false,
+  "server_version": "28.5.1",
+  "driver": "overlay2",
+  "probe_stdout": "memory=536870912\npids=64\ncpu=100000 100000\nuid=65534\ncap=0000000000000000\nnnp=1\nseccomp=2\nrootmount=ro,relatime\ninterfaces=lo\n"
+}

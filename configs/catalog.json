@@ -179,13 +179,17 @@
       "requires": [
         "sandbox"
       ],
-      "module": "components",
-      "state": "native component integrated; full paper experiment not executed",
+      "module": "yaml_twins",
+      "state": "native YAML benchmark with custom Context RSI completed; original code-agent reproduction pending",
       "formal_main_table_complete": false,
       "component": "trusting-trust-static",
       "component_state": "native component contract verified; full algorithm pipeline pending",
-      "container_profile": "trusting-trust-yaml",
-      "container_state": "integrated; skipped_environment per user instruction"
+      "container_profile": "trusting-trust-yaml-twins",
+      "container_state": "verified on rootless Docker; 48 real model calls completed",
+      "live_rsi_types": [
+        "Context"
+      ],
+      "live_scope": "one persistent prompt update per arm; native 5 train/12 heldout tasks"
     },
     {
       "id": "E09",
@@ -295,7 +299,7 @@
         "frozen.persona_labels"
       ],
       "module": "cim_live",
-      "state": "labels checkpointed for server migration",
+      "state": "first-user persona labels and two-context live canary completed; human review pending",
       "formal_main_table_complete": false
     }
   ]

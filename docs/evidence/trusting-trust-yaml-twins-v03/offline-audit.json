@@ -1,0 +1,17 @@
+{
+  "status": "verified",
+  "job_id": "trusting-trust-yaml-twins-v03",
+  "requests": 48,
+  "training_episodes": 10,
+  "heldout_episodes": 36,
+  "updates": 2,
+  "model": "gpt-5.6-sol",
+  "usage": {
+    "input_tokens": 13710,
+    "output_tokens": 5719
+  },
+  "exact_update_feedback_checked": true,
+  "heldout_or_witness_feedback_to_updater": false,
+  "scope": "native_YAML_benchmark_custom_Context_RSI_not_DGM_reproduction",
+  "full_paper_reproduction": false
+}

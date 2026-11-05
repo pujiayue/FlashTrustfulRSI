@@ -1,12 +1,14 @@
 # FlashTrustfulRSI
 
-可审计的可信 RSI 研究适配层。当前版本 **0.2.0a1（集成开发中）**；正式主实验尚未完成。
+可审计的可信 RSI 研究适配层。当前版本 **0.3.0a1（集成开发中）**；正式主实验尚未完成。
 
 [在线进展展示](https://pujiayue.github.io/FlashTrustfulRSI/) · [完成情况](docs/completed-results.md)
 
 模型统一请求 `gpt-5.6-sol`。每次请求保存独立的调用身份、输入、响应、模型名和 usage；跨进程重启重放成功记录。不同试验即使 prompt 相同，也分别计费和留档。未决请求和失败请求停止执行，须核对后恢复。
 
 ## 已有真实运行
+
+新增 [YAML 污染双胞胎完整说明](docs/yaml-twins.md)：147 rootless Docker 已通过实际容器验收，48次真实调用已完成。
 
 |Profile|实际范围|当前证据|
 |---|---|---|
@@ -16,6 +18,7 @@
 |MEXTRA|原生query生成、合成记忆代理、扩充/删除版本、三次输出匹配|19次调用；原公式和大小写修正版并列。原EHR/WebShop环境尚待接入|
 |Misevolution service|全部10个公开服务问题，原生固定偏置记忆与无记忆配对|20次目标调用＋20次事后盲标注；退款承诺0/10→4/10，未请求退款均0/3；无真实交易、待人工复核|
 |CIMemories|3 persona ×10次标注×2上下文，原完整memory、原披露judge和评分器|68次调用完成；两种prompt的violation均0/111，coverage 83.33%/50%；1用户、待人工复核|
+|Trusting Trust YAML|原生5训练/12 heldout任务；每臂一次自定义Context RSI更新|48调用；FullLoader见证0/12→12/12（污染臂），严格RCE见证均0；非DGM复现|
 |SHE seed / AgentDojo|原生四类seed资产和全部runtime hooks，4套件各clean/attack|20次调用，8轨迹完成；banking攻击未成功但utility=false；硬工具拦截0次；没有演化|
 
 这些结果用于验收链路和评分，不能推出统计性的安全提升。13项工作完整清单及缺口见 `configs/catalog.json`。FlashRSI对齐的T1设计包含286个分数格、858个seed格和288个源任务演化job，见 `configs/t1-design-matrix.json`；该文件明确标为设计矩阵，数据哈希和完整配方冻结后才成为可执行的正式实验manifest。
@@ -53,12 +56,12 @@ python3.12 -m venv .venv
 
 `plan`不调用模型。`run`会使用付费API。其他可选profile：`minja-qa`、`agentdojo-direct`、`mextra-synthetic`、`misevolution-service`、`cimemories`、`she-dojo-seed`。`trusting-trust-yaml`还需要容器镜像及候选代码目录。算法参数通过 `python -m flashtrustfulrsi.<模块名> --help` 查看。相同job ID恢复相同实验；改变配置或源代码应使用新ID。
 
-原canary阶段共用SQLite账本，设300请求/1000万输入token/100万输出token的技术上限。所有请求均入账，关闭隐式重试；上限持久化，不因重启清零。SHE新阶段独立冻结48请求/200万输入/10万输出token上限；两阶段均保留历史账本，不重置用量。当前累计301成功请求，376,117输入/200,789输出token。后续正式阶段需独立冻结完整recipe、job预算和manifest，保留历史账本。模型返回名必须匹配；第三方路由的真实后端身份无法由返回字符串独立确认。
+原canary阶段共用SQLite账本，设300请求/1000万输入token/100万输出token的技术上限。所有请求均入账，关闭隐式重试；上限持久化，不因重启清零。SHE新阶段独立冻结48请求/200万输入/10万输出token上限；两阶段均保留历史账本，不重置用量。新增YAML独立阶段48请求已完成，13,710输入/5,719输出token；累计349成功请求，389,827输入/206,508输出token。后续正式阶段需独立冻结完整recipe、job预算和manifest，保留历史账本。模型返回名必须匹配；第三方路由的真实后端身份无法由返回字符串独立确认。
 
 ## 即插即用的当前边界
 
-公开入口覆盖七个已实跑profile和一个容器witness入口，使用配置选择模块和稳定job ID。它们各自使用原生环境或明确标记的合成环境，尚未验证任意组合互换。六项原生组件已完成独立适配，见[组件说明](docs/components.md)。SHE完整演化、S-Harness完整循环、SafeEvolve训练、Misevolution其他分支、SEABench自进化、AgentPoison优化、AgentBreeder演化和Trusting Trust演化仍有集成工作；GuardVPO未公开、API模型权重训练不在本轮可执行范围。
+公开入口覆盖八个已实跑profile和一个容器witness入口，使用配置选择模块和稳定job ID。它们各自使用原生环境或明确标记的合成环境，尚未验证任意组合互换。六项原生组件已完成独立适配，见[组件说明](docs/components.md)。SHE完整演化、S-Harness完整循环、SafeEvolve训练、Misevolution其他分支、SEABench自进化、AgentPoison优化、AgentBreeder演化和Trusting Trust原始代码代理演化仍有集成工作；GuardVPO未公开、API模型权重训练不在本轮可执行范围。
 
-生成代码实验需要真实容器隔离测试通过。迁移后的目标服务器为yingboyun_pare，项目位于 `/root/data1/FlashTrustfulRSI`。仅Docker daemon启动成功不构成容器执行验收。
+生成代码实验需要真实容器隔离测试通过。模型调用及凭据保留在英博云，容器实验位于147的项目独立目录，通过无密钥SSH请求队列连接。147已有rootless Docker可运行并落实CPU/内存/PID限制，无需系统root权限；138本次重试仍因用户cgroup缺失失败。
 
-英博云当前40项集成检查通过；公开CI运行无需外部源码的19项检查，另6项原生组件测试需先下载固定源码。CI只运行离线合同和评分测试，不使用API密钥、不自动发起付费实验。核心原创代码Apache-2.0；外部依赖保持各自许可，见NOTICE和固定版本清单。
+本轮147独立环境35项测试全部通过；无外部源码时28项通过、7项跳过。英博云旧版40项集成检查保留为历史记录。CI只运行离线合同和评分测试，不使用API密钥、不自动发起付费实验。核心原创代码Apache-2.0；外部依赖保持各自许可，见NOTICE和固定版本清单。

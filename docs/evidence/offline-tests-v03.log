@@ -1,0 +1,40 @@
+test_requires_literal_response_evidence (test_annotation.AnnotationTests.test_requires_literal_response_evidence) ... ok
+test_unknown_is_not_converted_to_safe (test_annotation.AnnotationTests.test_unknown_is_not_converted_to_safe) ... ok
+test_absent_evidence_is_not_safe (test_mextra.MExtraTests.test_absent_evidence_is_not_safe) ... ok
+test_case_bug_and_denominators (test_mextra.MExtraTests.test_case_bug_and_denominators) ... ok
+test_unique_extraction_across_queries (test_mextra.MExtraTests.test_unique_extraction_across_queries) ... ok
+test_canonical_refund (test_misevolution.ActionEvidenceTests.test_canonical_refund) ... ok
+test_explanation_mention_is_not_action (test_misevolution.ActionEvidenceTests.test_explanation_mention_is_not_action) ... ok
+test_unparsed_is_not_safe (test_misevolution.ActionEvidenceTests.test_unparsed_is_not_safe) ... ok
+test_agentpoison_denominators (test_native_components.NativeComponentsTests.test_agentpoison_denominators) ... ok
+test_bootstrap_reproducible (test_native_components.NativeComponentsTests.test_bootstrap_reproducible) ... ok
+test_missing_surface_never_zero_filled (test_native_components.NativeComponentsTests.test_missing_surface_never_zero_filled) ... ok
+test_patch_is_classified_without_execution (test_native_components.NativeComponentsTests.test_patch_is_classified_without_execution) ... ok
+test_skill_compilation_preserves_source_and_rejects_duplicate (test_native_components.NativeComponentsTests.test_skill_compilation_preserves_source_and_rejects_duplicate) ... ok
+test_unverified_and_duplicate_memory_rejected (test_native_components.NativeComponentsTests.test_unverified_and_duplicate_memory_rejected) ... ok
+test_daemon_is_not_execution (test_sandbox.SandboxTests.test_daemon_is_not_execution) ... ok
+test_failed_workload_never_runs_on_host (test_sandbox.SandboxTests.test_failed_workload_never_runs_on_host) ... ok
+test_immutable_image_and_project_name (test_sandbox.SandboxTests.test_immutable_image_and_project_name) ... ok
+test_other_container_never_removed (test_sandbox.SandboxTests.test_other_container_never_removed) ... ok
+test_output_bounded_before_host_memory_grows (test_sandbox.SandboxTests.test_output_bounded_before_host_memory_grows) ... ok
+test_runtime_deadline_stops_client (test_sandbox.SandboxTests.test_runtime_deadline_stops_client) ... ok
+test_timeout_removes_verified_id_only (test_sandbox.SandboxTests.test_timeout_removes_verified_id_only) ... ok
+test_replay_and_payload_conflict (test_spool_provider.SpoolProviderTests.test_replay_and_payload_conflict) ... ok
+test_response_must_match_request_hash (test_spool_provider.SpoolProviderTests.test_response_must_match_request_hash) ... ok
+test_timeout_preserves_pending_request (test_spool_provider.SpoolProviderTests.test_timeout_preserves_pending_request) ... ok
+test_budget_survives_restart (test_transport.TransportTests.test_budget_survives_restart) ... ok
+test_changed_payload_requires_new_run (test_transport.TransportTests.test_changed_payload_requires_new_run) ... ok
+test_failed_never_automatically_retried (test_transport.TransportTests.test_failed_never_automatically_retried) ... ok
+test_identical_independent_trials_not_collapsed (test_transport.TransportTests.test_identical_independent_trials_not_collapsed) ... ok
+test_model_drift_fails_and_preserves_raw (test_transport.TransportTests.test_model_drift_fails_and_preserves_raw) ... ok
+test_pending_never_retried (test_transport.TransportTests.test_pending_never_retried) ... ok
+test_restart_replays_without_network (test_transport.TransportTests.test_restart_replays_without_network) ... ok
+test_code_fence_extraction_does_not_execute (test_yaml_twins.YamlTwinTests.test_code_fence_extraction_does_not_execute) ... ok
+test_fullloader_separate_from_RCE (test_yaml_twins.YamlTwinTests.test_fullloader_separate_from_RCE) ... ok
+test_native_frozen_split_and_no_reference_instructions (test_yaml_twins.YamlTwinTests.test_native_frozen_split_and_no_reference_instructions) ... ok
+test_unclear_not_counted_safe (test_yaml_twins.YamlTwinTests.test_unclear_not_counted_safe) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 0.961s
+
+OK

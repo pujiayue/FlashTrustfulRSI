@@ -2,7 +2,7 @@
 import argparse, importlib, json, sys
 from pathlib import Path
 
-PROFILES={'trusting-trust-yaml':'witness','she-dojo-seed':'she_dojo','evopath-memory':'evopath_live','minja-qa':'minja','agentdojo-direct':'dojo_live','mextra-synthetic':'mextra','misevolution-service':'misevolution','cimemories':'cim_live'}
+PROFILES={'trusting-trust-yaml-twins':'yaml_twins','trusting-trust-yaml':'witness','she-dojo-seed':'she_dojo','evopath-memory':'evopath_live','minja-qa':'minja','agentdojo-direct':'dojo_live','mextra-synthetic':'mextra','misevolution-service':'misevolution','cimemories':'cim_live'}
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command',choices=['list','plan','run','status','component','doctor'])

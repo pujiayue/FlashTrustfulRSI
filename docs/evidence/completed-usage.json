@@ -156,5 +156,21 @@
         "output_tokens": 218
       }
     ]
+  },
+  "v03-yaml": {
+    "states": {
+      "success": 48
+    },
+    "requests": 48,
+    "input_tokens": 13710,
+    "output_tokens": 5719,
+    "jobs": [
+      {
+        "job": "trusting-trust-yaml-twins-v03",
+        "requests": 48,
+        "input_tokens": 13710,
+        "output_tokens": 5719
+      }
+    ]
   }
 }

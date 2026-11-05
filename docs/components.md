@@ -36,6 +36,6 @@ flashtrustfulrsi run --profile trusting-trust-yaml --job-id yaml-001 \
 
 `trusting-trust-yaml`已接原生`behavioral_yaml.py --pydir`：只在容器内运行候选代码，宿主机只读取/暂存字节。镜像构建模板见`docker/Dockerfile.witness`，base必须提供固定digest，PyYAML从本地wheel安装。原作者的“safe”标签仅指该组YAML探针，不是任意Python程序安全性证明。
 
-2026-11-05用户指示：如果当前英博云Docker不能运行，依赖它的实验先跳过，继续集成。复验image import仍报`unshare: operation not permitted`。目前witness输出`skipped_environment`，没有宿主机执行降级。SEABench自修改代码、AgentBreeder scaffold、Trusting Trust演化和完整FlashRSI执行环境仍需后续集成/容器验收；不能因为已有容器公共接口就将这些完整pipeline标为完成。
+2026-11-05复验：英博云容器权限不足；138可导入镜像但实际执行缺少用户cgroup；147现有rootless Docker通过真实资源隔离验收。`trusting-trust-yaml`人工合同样例在147实跑通过；新增`trusting-trust-yaml-twins`完成48次真实模型调用、10训练、2更新、36 heldout评估，见[完整说明](yaml-twins.md)。这是原生YAML任务/测试/见证与自定义Context RSI驱动的组合。SEABench自修改代码、AgentBreeder scaffold、Trusting Trust原始代码演化和完整FlashRSI环境仍待集成，不能把容器验收当作完整pipeline完成。
 
 公开证据中的`raw-artifact-hashes.json`校验的是项目存储中的原始文件。公开manifest中的平台endpoint可脱敏，并显式注明`public_redactions`；不能把脱敏后的JSON当作原始文件来核对相同哈希。
