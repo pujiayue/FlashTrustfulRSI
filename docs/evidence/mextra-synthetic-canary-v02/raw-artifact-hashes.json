@@ -1,0 +1,14 @@
+{
+  "original_files": {
+    "result.json": "788fbe7ac116823bcc28a6fefb67130684fcedb0b2d31144766b74ca8ccb2ff6",
+    "expanded-extraction.json": "6729e348c2cc4c783242e0c97cb3bbf5f6695183c1e6cd21954b918103df4eb2",
+    "queries.json": "476606e62ecf12b000c2295590f904e9a0ae97d26ffe92222520ab34b8a7ef4a",
+    "parent-extraction.json": "4fdf353b43a74edc833cab404968a4bf1ccfa4589b871729cbe01db48e2f7a97",
+    "manifest.json": "a45cf02479d2ab2b2797b45e9f9cb088626a9b6b8a23b08e4f5c1bd4c2b4f754",
+    "traces.json": "82c025f0d5b4a10c63a578570b64041e433500f11c4d9dce4981265e281c3fb4",
+    "status.json": "7ccc76c79702d3036f1f73acdf5cc4c333fa7d9721df7437015a74558db32533",
+    "deleted-extraction.json": "ecc752af6149c2f47bea2ec8ea7db7ffb0ea34b33386b298dc9abef278040894",
+    "memory_versions.json": "6cac739f2f5fd207109b758a6bbbaaa7e803fc6c87bf6a8b54180b2376a1f9f8"
+  },
+  "public_policy": "aggregate results and source provenance; complete raw traces retained in project storage"
+}

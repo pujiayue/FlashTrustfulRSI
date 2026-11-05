@@ -1,0 +1,4 @@
+FlashTrustfulRSI original adapter code, Copyright 2026 FlashTrustfulRSI contributors.
+Core code: Apache-2.0.
+External upstream projects retain their own licenses. No external source or datasets are redistributed in this repository.
+See upstream.lock.json and configs/catalog.json. CIMemories is CC BY-NC 4.0; MEXTRA has no identified top-level license and is obtained externally by the user.

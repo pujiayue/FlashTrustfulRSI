@@ -1,0 +1,37 @@
+[
+  {
+    "id": "flashrsi",
+    "repo": "RUC-NLPIR/FlashRSI",
+    "commit": "8567c658f52b73ddcc75cb842d9e8f7f88bd1e6f",
+    "license": "Apache-2.0",
+    "import_root": ""
+  },
+  {
+    "id": "E01",
+    "repo": "HQ-Lin/EvoPathBench",
+    "commit": "a0a596237d888304c25be2828d30c99e2f66b3b7",
+    "license": "MIT",
+    "import_root": ""
+  },
+  {
+    "id": "E04",
+    "repo": "RainbowQTT/SHE",
+    "commit": "0c656460d9d8acdf406a2271d657f7a7b60bb255",
+    "license": "Apache-2.0",
+    "import_root": ""
+  },
+  {
+    "id": "E11",
+    "repo": "ethz-spylab/agentdojo",
+    "commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+    "license": "MIT",
+    "import_root": "src"
+  },
+  {
+    "id": "E13",
+    "repo": "facebookresearch/CIMemories",
+    "commit": "e39806e92ec66db120c0f3b73c9cb105e7ff5314",
+    "license": "CC-BY-NC-4.0",
+    "import_root": null
+  }
+]

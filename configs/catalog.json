@@ -1,0 +1,288 @@
+{
+  "schema": "flashtrustfulrsi.catalog.v1",
+  "model": "gpt-5.6-sol",
+  "methods": [
+    {
+      "id": "E01",
+      "name": "EvoPathBench",
+      "trust_dimension": "A 改进有效性与持续性",
+      "rsi_types": "Context / Memory / Skill",
+      "repo": "https://github.com/HQ-Lin/EvoPathBench",
+      "commit": "a0a596237d888304c25be2828d30c99e2f66b3b7",
+      "license": "MIT",
+      "entrypoints": [
+        "evolens/__main__.py",
+        "evolens/runner.py",
+        "evolens/metrics.py",
+        "analysis/evaluate_dimensions.py"
+      ],
+      "requires": [
+        "model.chat",
+        "simulator.finance"
+      ],
+      "module": "evopath_live",
+      "state": "live canary completed",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E02",
+      "name": "Your Agent May Misevolve",
+      "trust_dimension": "B 行为安全与约束保持",
+      "rsi_types": "Model / Memory / Tool / Workflow",
+      "repo": "https://github.com/ShaoShuai0605/Misevolution",
+      "commit": "2601397de8b3de809d920555f05675d0a40a5979",
+      "license": "未识别",
+      "entrypoints": [
+        "memory_misevolution/reward_hacking_test.py",
+        "tool_misevolution/insecure_tool_creation/insecure_tool_evaluation.sh",
+        "model_misevolution/harmbench/run_harmbench_pipeline.sh",
+        "workflow_misevolution/scripts/evaluator.py"
+      ],
+      "requires": [
+        "external.misevolution",
+        "dataset",
+        "environment"
+      ],
+      "module": "misevolution",
+      "state": "service fixed-memory canary completed; other paths pending",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E03",
+      "name": "SEABench",
+      "trust_dimension": "B 行为安全与约束保持",
+      "rsi_types": "Context / Memory / Code / Workflow / Skill",
+      "repo": "https://github.com/SEABench-Endogenous-Misalignment/SEABench",
+      "commit": "8e0a108cddf069bf640d565edbd712891f230384",
+      "license": "未识别",
+      "entrypoints": [
+        "prompt_optimization/refine_existing_sequence.py",
+        "scripts/run.py",
+        "prompt_optimization_analysis/reasoning_monitor/src/reasoning_monitor/cli.py"
+      ],
+      "requires": [
+        "external.seabench",
+        "sandbox"
+      ],
+      "module": null,
+      "state": "not yet end-to-end validated",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E04",
+      "name": "SHE",
+      "trust_dimension": "B 行为安全与约束保持",
+      "rsi_types": "Context / Memory / Tool / Workflow",
+      "repo": "https://github.com/RainbowQTT/SHE",
+      "commit": "0c656460d9d8acdf406a2271d657f7a7b60bb255",
+      "license": "Apache-2.0",
+      "entrypoints": [
+        "scripts/run_safety_bench_evaluation.py",
+        "scripts/run_safety_bench_evolution.sh",
+        "evaluate/judge_safety_bench.py",
+        "she/evolution/evaluator.py"
+      ],
+      "requires": [
+        "external.she_benchmark_runtime",
+        "model.chat"
+      ],
+      "module": null,
+      "state": "not yet end-to-end validated",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E05",
+      "name": "AgentBreeder",
+      "trust_dimension": "B 行为安全与约束保持",
+      "rsi_types": "Code / Workflow",
+      "repo": "https://github.com/jrosseruk/AgentBreeder",
+      "commit": "62c361657ca8b7e0df60c4176e009f04e06b05c5",
+      "license": "MIT",
+      "entrypoints": [
+        "src/eval.py",
+        "src/eval.sh",
+        "src/evals/benchmark.py",
+        "src/evals/benchmarks/salad_data.py"
+      ],
+      "requires": [
+        "sandbox",
+        "dataset"
+      ],
+      "module": null,
+      "state": "not yet end-to-end validated",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E06",
+      "name": "SafeCoEvo",
+      "trust_dimension": "B 行为安全与约束保持",
+      "rsi_types": "Context / Memory / Skill / Workflow / Model(Guard)",
+      "repo": "https://github.com/SII-YUCHENG2002/SafeCoEvo",
+      "commit": "91d958a338a3be0d1d1e82ecb2c7c07782b06fec",
+      "license": "MIT",
+      "entrypoints": [
+        "scripts/run_safecoevo.py",
+        "src/benchmark_runtime.py",
+        "src/safecoevo_runtime/contracts.py"
+      ],
+      "requires": [
+        "external.guard_protocol",
+        "external.benchmark_runtime"
+      ],
+      "module": null,
+      "state": "not yet end-to-end validated",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E07",
+      "name": "SafeEvolve",
+      "trust_dimension": "B 行为安全与约束保持",
+      "rsi_types": "Model / Context / Skill",
+      "repo": "https://github.com/MaoPopovich/SafeEvolve",
+      "commit": "94dc3693475a707a1a1fa34f0f09ec1dfcd0c87e",
+      "license": "MIT",
+      "entrypoints": [
+        "core/skillrl/runtime_skill_compiler.py",
+        "scripts/phase1/evolve_skill.sh",
+        "scripts/phase2/train_grpo.sh",
+        "scripts/evaluation/README.md"
+      ],
+      "requires": [
+        "external.safeevolve_tasks",
+        "environment"
+      ],
+      "module": null,
+      "state": "not yet end-to-end validated",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E08",
+      "name": "Trusting Trust Revisited",
+      "trust_dimension": "C 攻击鲁棒性与污染恢复",
+      "rsi_types": "Code / Tool / Context / Workflow",
+      "repo": "https://github.com/froeschele/trusting-trust-revisited",
+      "commit": "93f1a8f32fd22261852445d6a348e7a8f417da28",
+      "license": "MIT",
+      "entrypoints": [
+        "benchmarks/prepare.py",
+        "evaluation/verdict.py",
+        "evaluation/behavioral_witness/behavioral_certcheck.py"
+      ],
+      "requires": [
+        "sandbox"
+      ],
+      "module": null,
+      "state": "not yet end-to-end validated",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E09",
+      "name": "MINJA",
+      "trust_dimension": "C 攻击鲁棒性与污染恢复",
+      "rsi_types": "Memory",
+      "repo": "https://github.com/dsh3n77/MINJA",
+      "commit": "a3ec8da0f7740b3fe629f6706e1c14296ee6861d",
+      "license": "MIT",
+      "entrypoints": [
+        "QA/main.py",
+        "EHR/ehragent/main.py",
+        "EHR/ehragent/evaluate.py",
+        "rap/README.md"
+      ],
+      "requires": [
+        "model.chat",
+        "levenshtein",
+        "minja.qa_source"
+      ],
+      "module": "minja",
+      "state": "live canary completed; injection unsuccessful",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E10",
+      "name": "AgentPoison",
+      "trust_dimension": "C 攻击鲁棒性与污染恢复",
+      "rsi_types": "Memory / 知识库",
+      "repo": "https://github.com/AI-secure/AgentPoison",
+      "commit": "7b02e28f5e477052bd16c778fef7c1f78f7c9d7c",
+      "license": "MIT",
+      "entrypoints": [
+        "ReAct/eval.py",
+        "EhrAgent/ehragent/eval.py",
+        "scripts/agent_driver/run_evaluation.sh"
+      ],
+      "requires": [
+        "embedding_model",
+        "retrieval_index",
+        "model.chat"
+      ],
+      "module": null,
+      "state": "not yet end-to-end validated",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E11",
+      "name": "AgentDojo",
+      "trust_dimension": "C 攻击鲁棒性与污染恢复",
+      "rsi_types": "Context / Tool；适配后覆盖各类",
+      "repo": "https://github.com/ethz-spylab/agentdojo",
+      "commit": "089ed468cf3ed0322acc66b0211f26d9d90dbf60",
+      "license": "MIT",
+      "entrypoints": [
+        "src/agentdojo/scripts/benchmark.py",
+        "src/agentdojo/benchmark.py"
+      ],
+      "requires": [
+        "model.tools",
+        "agentdojo.native"
+      ],
+      "module": "dojo_live",
+      "state": "four-suite native attack canary completed",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E12",
+      "name": "MEXTRA",
+      "trust_dimension": "D 隐私与信息流",
+      "rsi_types": "Memory",
+      "repo": "https://github.com/wangbo9719/MEXTRA",
+      "commit": "d1e071f27b8328e0b57458afa17f78c1b09bcda6",
+      "license": "未识别",
+      "entrypoints": [
+        "EHRAgent/attacking/run_attack.py",
+        "EHRAgent/attacking/evaluation.py",
+        "RAP/attacking/run_attack.py"
+      ],
+      "requires": [
+        "external.mextra",
+        "memory_agent"
+      ],
+      "module": "mextra",
+      "state": "synthetic-target attack canary completed",
+      "formal_main_table_complete": false
+    },
+    {
+      "id": "E13",
+      "name": "CIMemories",
+      "trust_dimension": "D 隐私与信息流",
+      "rsi_types": "Memory / Context",
+      "repo": "https://github.com/facebookresearch/CIMemories",
+      "commit": "e39806e92ec66db120c0f3b73c9cb105e7ff5314",
+      "license": "NOASSERTION",
+      "entrypoints": [
+        "data/persona_gold_labels.py",
+        "eval/eval.py",
+        "eval/exp.sh",
+        "eval/metrics.py"
+      ],
+      "requires": [
+        "cimemories.noncommercial",
+        "model.chat",
+        "frozen.persona_labels"
+      ],
+      "module": "cim_live",
+      "state": "labels checkpointed for server migration",
+      "formal_main_table_complete": false
+    }
+  ]
+}

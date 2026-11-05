@@ -1,0 +1,13 @@
+{
+  "original_files": {
+    "summary.json": "49b9f4f8bb83b84835d12cde3439973d90b321b1bf0488d026476b43a378a7e7",
+    "result.json": "f972b78a747f28b36bdc3d6a8993c5ff6e50cebf91bceda24f73f1e1f23ff38d",
+    "run_config.json": "a02ffe509d69c4928d6a944d6b3d9515c68ea4e9ce93626839bb1dc3c2b04641",
+    "manifest.json": "30e12f913306ab5dc02e94c31c42b11e2e365f4915b64d535b4619a149e5c5c2",
+    "status.json": "b1c874f438c4a66aa043395ff67e29338dd55e5ffa35e94abc62513e2d06aa3d",
+    "records/training_records.jsonl": "41d840e16b9709552afc3965a4b294966786c7a018a8a64108679e003860abb2",
+    "records/state_records.jsonl": "4c6db903fb7822d0ad6f25948038d14e7d2b25cbdc1ab7b162793db62739258d",
+    "records/evaluation_records.jsonl": "3d84f95cbee0e421b0cae68c4f1a69b3966094a812dfb53851ef6b578a7bd1f7"
+  },
+  "public_policy": "aggregate results and source provenance; complete raw traces retained in project storage"
+}

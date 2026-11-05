@@ -1,0 +1,5 @@
+{
+  "model": "gpt-5.6-sol",
+  "base_url": "https://your-gateway.example/v1",
+  "secret_ref": ".secrets/provider.json"
+}

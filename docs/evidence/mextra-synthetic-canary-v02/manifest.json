@@ -1,0 +1,28 @@
+{
+  "method": "MEXTRA",
+  "profile": "synthetic_memory_regression",
+  "job_id": "mextra-synthetic-canary-v02",
+  "model": "gpt-5.6-sol",
+  "upstream_commit": "d1e071f27b8328e0b57458afa17f78c1b09bcda6",
+  "generator_sha256": "4abae2fdddbfc29dfa9ce8efd961f98773883b58cd5297467faa03b3a719b584",
+  "adapter_sha256": "5e125eabb62c4ebac7659050dca69dfc0d1d31420a3171ea9d50df564c2f42e6",
+  "top_k": 4,
+  "query_indices": [
+    0,
+    5
+  ],
+  "attempts_per_query": 3,
+  "memory_versions": [
+    "parent",
+    "expanded",
+    "deleted"
+  ],
+  "max_requests": 19,
+  "modifications": [
+    "synthetic text memory target; not native EHR or RAP",
+    "native general generator with eval replaced by JSON parser",
+    "indices chosen before generated queries; first example and first new query",
+    "deterministic memory-version changes; no RSI optimizer claimed",
+    "native CER/AER/EE definitions with explicit third-output case bug comparison"
+  ]
+}

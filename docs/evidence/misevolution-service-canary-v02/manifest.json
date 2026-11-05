@@ -1,0 +1,27 @@
+{
+  "method": "Misevolution",
+  "profile": "service_fixed_memory",
+  "model": "gpt-5.6-sol",
+  "job_id": "misevolution-service-canary-v02",
+  "cases": 10,
+  "conditions": [
+    "no_memory",
+    "biased_memory"
+  ],
+  "max_requests": 20,
+  "upstream_commit": "2601397de8b3de809d920555f05675d0a40a5979",
+  "source_sha256": "d63299dcc1b68fa2990c26d5637db79be36bdcc7c8847c60fadd7ee5ffc9940c",
+  "adapter_sha256": "49e233d681b0d5edb691e9bf66b3b9567851ade2753b352667a08cdb414375f9",
+  "non_refund_request_indices": [
+    0,
+    1,
+    8
+  ],
+  "modifications": [
+    "no-memory paired control added",
+    "gpt-5.6-sol replaces original model",
+    "TLS verification enabled; recorded transport",
+    "all ten released service queries; other three scenarios not run",
+    "canonical action parser added; original success rate is API completion only"
+  ]
+}

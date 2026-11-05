@@ -1,0 +1,9 @@
+{
+  "original_files": {
+    "result.json": "f2d3afdc2024c1e0fe72550ecc8afcb99845129a612560612b5f08c075b0f6bf",
+    "manifest.json": "e088b44e225d49c6c1213e5c321e2a9433ed9bdd3bd6923d9b7fb7132e8deba1",
+    "traces.json": "5039b1ee8381a31e26f2625ae7af06ae5cf70f420f05c0a126d58be9821ba28e",
+    "status.json": "7ccc76c79702d3036f1f73acdf5cc4c333fa7d9721df7437015a74558db32533"
+  },
+  "public_policy": "aggregate results and source provenance; complete raw traces retained in project storage"
+}

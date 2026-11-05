@@ -1,0 +1,99 @@
+{
+  "schema": "flashtrustfulrsi.evopath.v1",
+  "job_id": "evopath-accumulation-canary-v02",
+  "upstream_commit": "a0a596237d888304c25be2828d30c99e2f66b3b7",
+  "stream_ids": [
+    "accumulation-endogenous-event_jump-shard-000"
+  ],
+  "settings": {
+    "model": "gpt-5.6-sol",
+    "base_url": "configured_gateway",
+    "api_key_env": "FLASH_TRUST_SECRET_REF_ONLY",
+    "temperature": 0.1,
+    "top_p": null,
+    "api_seed": null,
+    "decision_max_tokens": 700,
+    "reflection_max_tokens": 1000,
+    "timeout_seconds": 120.0,
+    "max_retries": 0,
+    "decision_interval": 24,
+    "context_episodes": 5,
+    "context_steps": 3,
+    "skillopt_edit_budget": 2,
+    "skill_document_max_chars": 6000,
+    "skillboost_candidate_count": 4,
+    "skillboost_max_case_regression": 0.25,
+    "skillboost_max_slice_regression": 0.0,
+    "skill_validation_variants": 1,
+    "skillx_max_items_per_level": 6,
+    "trace2skill_analyst_count": 2,
+    "skillgrad_max_patterns": 12,
+    "skillgrad_max_references": 6,
+    "save_raw_responses": true,
+    "enable_thinking": false,
+    "thinking_budget": null,
+    "max_consecutive_failures": 1
+  },
+  "conditions": [
+    "baseline",
+    "episodic_memory"
+  ],
+  "state_off_conditions": [
+    "episodic_memory"
+  ],
+  "campaigns": 1,
+  "campaign_offset": 42,
+  "repeats": 1,
+  "dataset_hashes": {
+    "episodes.jsonl": "1bdfe096daee3df4cdd3102f52f25e7eb635cf34a86fa32322577116957a34c9",
+    "manifest.json": "24fc1c3cea676c8ceb7942bb372974931ca84b06ea2a43709c762dde4bf346b6",
+    "resources/bootstrap_replicates_summary.jsonl": "ef775af74ce29ad90c2f86b8babe60d6ea93d334dbe4f7ab7fefb52d517b522b",
+    "resources/calibration_profile.json": "60a1aa106fda6d92fac1e4c1e3e250038398dc37b66994b6e1d347975c885e28",
+    "resources/locked_holdout_validation.json": "7245383a7bbb9729aabfbe9d6613e17e305767a22a80d8324244674aa195ebd8",
+    "resources/orderflow_local_projection.json": "98644119b052b81c7690e49429bf229fe4df64e5ff90ed931528a6c6defed865",
+    "resources/orderflow_response_validation.json": "f5897c0275b3079d33fefbf6c8865c76a20fef3fe5fcb4f996a04a2002df0272",
+    "resources/parameter_origin_ledger.json": "8bc08a942990a613a661ce8e8fda26a5b23c38bfdf955ec1a79c423c69c4138b",
+    "resources/regime_model.json": "4ab56e0bc4874d968342aeadca8897d524b63dcb07de72a51d327c54f83f5601",
+    "streams.jsonl": "4c3d504f969286fda626d638a5969aa2e104409c17ae2939b931b340bc6c6d07",
+    "validation_report.json": "631d4dceff1a7a55c86b3199cb4345df1d9a61b81b12dedf18b3dc25f03fea64"
+  },
+  "estimate": {
+    "by_condition": {
+      "baseline": {
+        "decision_calls": 35,
+        "candidate_validation_decision_calls": 0,
+        "reflection_calls": 0,
+        "skill_optimizer_calls": 0,
+        "logical_calls": 35
+      },
+      "episodic_memory": {
+        "decision_calls": 65,
+        "candidate_validation_decision_calls": 0,
+        "reflection_calls": 5,
+        "skill_optimizer_calls": 0,
+        "logical_calls": 70
+      }
+    },
+    "decision_calls": 100,
+    "candidate_validation_decision_calls": 0,
+    "reflection_calls": 5,
+    "skill_optimizer_calls": 0,
+    "logical_calls": 105,
+    "max_http_attempts": 105,
+    "output_token_upper_bound": 75000,
+    "configured_completion_token_cap_sum": 75000,
+    "configured_thinking_token_cap_sum": 0,
+    "decision_interval": 24
+  },
+  "max_concurrency": 1,
+  "evidence_scope": "live_model_canary",
+  "modifications": [
+    "single requested API model",
+    "recorded transport; retries disabled",
+    "campaign IDs are native independent seeds",
+    "explicit stream subset",
+    "decision_interval=24"
+  ],
+  "adapter_sha256": "f66d92a9d568c4fc9f191dc21ce51139f2cd4cb58ae565366738843a6c27904b",
+  "transport_sha256": "ca1b8f1fb0c1dac5d547d145727c5c6db4946407676baa4be107e9ae6d9656d4"
+}
