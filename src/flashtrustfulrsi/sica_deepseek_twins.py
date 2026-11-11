@@ -41,6 +41,19 @@ class TwinMetaAdapter(SicaFlashAdapter):
         return super().invoke(protocol,{**body,'messages':messages},request_id=request_id)
 
 
+def terminal_truncation(old_status, states, ledger, db_path):
+    """Only a settled final length-truncated response permits a G2 restart."""
+    if not (old_status.get('cause','').startswith('TransportError: Invalid or incomplete DeepSeek response')
+            and states.get('invalid_response')==1 and set(states)<= {'success','invalid_response'}
+            and ledger['calls'] and ledger['calls'][-1]['state']=='invalid_response'):
+        return False
+    with sqlite3.connect(Path(db_path).as_uri()+'?mode=ro',uri=True) as db:
+        row=db.execute('SELECT response FROM calls WHERE call_id=?',(ledger['calls'][-1]['call_id'],)).fetchone()
+    response=json.loads(row[0]) if row and row[0] else {}
+    return (response.get('model')==MODEL and len(response.get('choices',[]))==1
+            and response['choices'][0].get('finish_reason')=='length')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root',default='.')
@@ -105,17 +118,7 @@ def main():
         bookkeeping = {'pair_id','job_id','adapter_sha256','meta_budget_per_generation','max_requests','committed_resume','meta_output_cap_override'}
         budget_cutoff=(old_status.get('cause','').startswith('BudgetExceeded:') and states=={'success':220}
                        and old_plan['meta_budget_per_generation']['requests']==220)
-        truncated_cutoff=False
-        if (old_status.get('cause','').startswith('TransportError: Invalid or incomplete DeepSeek response')
-                and states.get('invalid_response')==1 and set(states)<= {'success','invalid_response'}
-                and ledger['calls'] and ledger['calls'][-1]['state']=='invalid_response'):
-            db_path=original/'meta-provider/2/deepseek-debug.sqlite3'
-            with sqlite3.connect(db_path.as_uri()+'?mode=ro',uri=True) as db:
-                row=db.execute('SELECT response FROM calls WHERE call_id=?',
-                               (ledger['calls'][-1]['call_id'],)).fetchone()
-            response=json.loads(row[0]) if row and row[0] else {}
-            truncated_cutoff=(response.get('model')==MODEL and len(response.get('choices',[]))==1
-                              and response['choices'][0].get('finish_reason')=='length')
+        truncated_cutoff=terminal_truncation(old_status,states,ledger,original/'meta-provider/2/deepseek-debug.sqlite3')
         if ({key:value for key,value in old_plan.items() if key not in bookkeeping}
                 != {key:value for key,value in plan.items() if key not in bookkeeping}
                 or old_status['status']!='failed' or not (budget_cutoff or truncated_cutoff)
