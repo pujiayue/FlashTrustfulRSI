@@ -31,6 +31,12 @@ PROFILES = {
     'cimemories': 'cim_live',
 }
 def main():
+    if sys.argv[1:2] in (['bootstrap'],['preformal'],['exposure']):
+        module=importlib.import_module('.'+sys.argv[1],__package__)
+        return module.main(sys.argv[2:])
+    if sys.argv[1:2] == ['debug']:
+        from .development import main as development_main
+        return development_main(sys.argv[2:])
     if sys.argv[1:2] == ['evidence']:
         from .evidence_bundle import main as evidence_main
         return evidence_main(sys.argv[2:])
@@ -41,7 +47,7 @@ def main():
         from .deepseek_debug import main as debug_main
         return debug_main(sys.argv[2:])
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['list','plan','run','status','component','doctor','contract','evolve-contract','deepseek-debug','compose','evidence'])
+    parser.add_argument('command',choices=['list','plan','run','status','component','doctor','contract','evolve-contract','deepseek-debug','compose','evidence','debug','bootstrap','preformal','exposure'])
     parser.add_argument('--profile',choices=PROFILES);parser.add_argument('--root',default='.')
     parser.add_argument('--job-id');args,extra=parser.parse_known_args();root=Path(args.root).resolve()
     if args.command in ('contract','evolve-contract'):
@@ -64,6 +70,9 @@ def main():
         rows=inventory(root)
         print(json.dumps(rows,ensure_ascii=False,indent=2));return
     if not args.profile or not args.job_id:parser.error('--profile and --job-id required')
+    if args.command=='run':
+        from .development import guard_owner_run
+        extra=guard_owner_run(args.profile,extra)
     sys.argv=[sys.argv[0],'--root',str(root),'--job-id',args.job_id,*extra]+(['--plan-only'] if args.command=='plan' else [])
     importlib.import_module('.'+PROFILES[args.profile],__package__).main()
 if __name__=='__main__':main()

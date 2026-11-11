@@ -73,6 +73,29 @@ class NativeCompositionTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(algorithm._record,original)
             self.assertEqual(native_seen[0][1]['accepted'],False)
 
+    async def test_cached_audit_uses_original_observations_without_constructing_target(self):
+        from flashrsi.core import Task,Trajectory
+        class Snapshot:
+            id='original'
+            def save(self,path):Path(path).write_text('{"id":"original"}')
+        task=Task('case','frozen question')
+        row=Trajectory(task=task,output='recorded answer',metrics={'em':1.})
+        class Bench:
+            primary_metric='em'
+            def load(self):return {'train':(),'dev':(),'test':(task,)}
+            def grade(self,rows):return rows
+        def forbidden(role):raise AssertionError('Cached roles must not construct or invoke a target')
+        with tempfile.TemporaryDirectory() as tmp:
+            session=TrustSession(Path(tmp)/'audit')
+            result=await session.audit(Snapshot(),Snapshot(),[AuditSpec('heldout',{})],forbidden,lambda config:Bench(),
+                cached_pairs={('heldout','initial'):(row,),('heldout','selected'):(row,)})
+            self.assertEqual(result['audits']['heldout']['native-paired-utility']['em']['delta'],0.)
+            wrong=Trajectory(task=Task('other','changed question'),output='answer',metrics={'em':1.})
+            session=TrustSession(Path(tmp)/'wrong')
+            with self.assertRaises(ValueError):
+                await session.audit(Snapshot(),Snapshot(),[AuditSpec('heldout',{})],forbidden,lambda config:Bench(),
+                  cached_pairs={('heldout','initial'):(wrong,)})
+
     async def test_registry_delegates_to_native_objects(self):
         from flashrsi import runner
         inventory=native_inventory()

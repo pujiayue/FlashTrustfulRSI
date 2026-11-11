@@ -183,7 +183,7 @@ async def execute(args):
         # test partition is never sent to a model by this probe.
         sampled = {'train':full['train'][2:6], 'dev':full['dev'][2:6], 'test':full['dev'][6:8]}
     else:
-        sampled = {name:rows[:2] for name,rows in full.items()}
+        sampled = {'train':full['train'][:2],'dev':full['dev'][:2],'test':full['dev'][6:8]}
     bench._splits = {**sampled, 'test':[]}
     cls = getattr(algorithms,METHODS[args.method])
     if DEV_OVERRIDES[args.method].keys() - cls._defaults.keys():
@@ -212,7 +212,10 @@ async def execute(args):
             'splits':{name:[row.task_id for row in rows] for name,rows in sampled.items()},
             'native_config':config,'worker':'LLM' if args.method in TEXT_METHODS else 'MiniAgent',
             'provider_budget':budget.__dict__,'selection':'native train and dev only; test exposed after evolve returns',
-            'transport':'MiniAgent Responses text and function history to Chat; cache key and encrypted reasoning options stay local'}
+            'transport':'MiniAgent Responses text and function history to Chat; cache key and encrypted reasoning options stay local',
+            'formal_test_rows_sent':False, 'formal_data_used':False}
+    if not (args.admission_probe or args.screen_dev or args.from_dev_screen):
+        spec['development_slice']={'train':['train',0,2],'dev':['dev',0,2],'test':['dev',6,8]}
     if args.admission_probe:
         spec['development_slice'] = {'train':['train',2,6],'dev':['dev',2,6],'test':['dev',6,8]}
     if args.screen_dev:

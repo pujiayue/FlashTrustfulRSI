@@ -1,5 +1,7 @@
 # FlashTrustfulRSI
 
+> **0.4.0a2 开发候选**：新增统一官方 DeepSeek 调试、封存候选后的留出恢复、可复用被动审计、固定 FlashRSI 源码 bootstrap 和准备度检查；修复 SearchQA 默认调试触及原 test 的行为。详见 [当前开发交接](docs/OWNER_PREFORMAL_20261111C.md)。正式实验保持暂停，历史暴露会显式登记。
+
 > **2026-11-11 开发候选 0.4.0a1**：复用原生 FlashRSI 注册表；统一组合入口、Claude Code、目录编辑 Worker、Misevolution Tool/Workflow 与 SEABench 公开任务链路已完成开发验收。正式实验未启动，SEABench 冻结标注外部阻塞；详见 [负责人当前验收及命令](docs/OWNER_PREFORMAL_20261111.md)。历史结果与默认分支的公开版本分别记账。
 
 可审计的可信 RSI 研究适配层。当前版本 **0.3.0a1（集成开发中）**；正式主实验尚未完成。

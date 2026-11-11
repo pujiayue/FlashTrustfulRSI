@@ -106,6 +106,41 @@ class NativeUtilityEvaluator:
         return results
 
 
+class SnapshotProvenanceEvaluator:
+    """D5 engineering evidence; a valid snapshot hash is not a safety verdict."""
+    name='snapshot-provenance'
+    dimensions=('D5',)
+    stages=('S3','S4')
+
+    def __init__(self,directory):self.directory=Path(directory)
+
+    def evaluate(self,context):
+        from flashrsi.core import Snapshot
+        versions={}
+        for role,expected in context.snapshots.items():
+            path=self.directory/(role+'.json');snapshot=Snapshot.load(path)
+            if snapshot.id!=expected['id'] or digest(path)!=expected['sha256']:
+                raise ValueError('Snapshot provenance differs from the sealed audit')
+            versions[role]=snapshot
+        before,after=versions['initial'],versions['selected']
+        if before.root_id!=after.root_id:raise ValueError('Audited snapshots have different native lineage roots')
+        names=set(before.files)|set(after.files)
+        changed=[name for name in sorted(names) if before.files.get(name)!=after.files.get(name)]
+        return {'status':'verified','same_snapshot':before.id==after.id,'root_id':before.root_id,
+                'selected_parent_id':after.parent_id,'direct_parent_transition':after.parent_id==before.id,
+                'changed_files':changed,'changed_components':sorted({(after.files.get(name) or before.files[name]).component for name in changed}),
+                'complete_ancestry_claim':before.id==after.id or after.parent_id==before.id,
+                'safety_verdict':None,'meaning':'Snapshot integrity and direct ancestry only; no behavioral safety or recursive-improvement conclusion.'}
+
+
+def evaluator_plugins(names,directory):
+    factories={'native-paired-utility':NativeUtilityEvaluator,'snapshot-provenance':lambda:SnapshotProvenanceEvaluator(directory)}
+    if (not isinstance(names,list) or not names or len(names)!=len(set(names))
+            or any(name not in factories for name in names)):
+        raise ValueError('Explicit distinct passive evaluator names required')
+    return tuple(factories[name]() for name in names)
+
+
 class ComponentAuditEvaluator:
     """Expose an existing scoring component through an explicit evidence mapper.
 
@@ -176,7 +211,7 @@ class TrustSession:
             algorithm._record = original
         return await self.audit(initial, selected, audits, target_factory, benchmark_factory, events=events)
 
-    async def audit(self, initial, selected, audits, target_factory, benchmark_factory, *, events=()):
+    async def audit(self, initial, selected, audits, target_factory, benchmark_factory, *, events=(), cached_pairs=None):
         """Audit saved native versions with no Worker, Algorithm or new selection."""
         from flashrsi._records import _trajectory_record
         if not (self.directory/'initial.json').exists():
@@ -193,12 +228,20 @@ class TrustSession:
                 raise ValueError('Audit benchmarks must contain test-only developer records')
             pair = {}
             for role, snapshot in (('initial', initial), ('selected', selected)):
-                target = target_factory(f'{audit.name}-{role}')
-                if target.snapshot.id != initial.id:
-                    raise ValueError('Audit target did not reopen the same native seed root')
-                target.update(snapshot)
-                target.set_scope({name: 'r' for name in target.component_rules})
-                pair[role] = benchmark.grade(await target.rollout(splits['test'], snapshot=snapshot))
+                if cached_pairs is not None and (audit.name,role) in cached_pairs:
+                    pair[role]=tuple(cached_pairs[audit.name,role])
+                    if any(row.status!='finished' for row in pair[role]):
+                        raise ValueError('Cached audit contains incomplete observations')
+                    verified=benchmark.grade(pair[role])
+                    if [dict(row.metrics) for row in verified]!=[dict(row.metrics) for row in pair[role]]:
+                        raise ValueError('Cached audit native metrics changed')
+                else:
+                    target = target_factory(f'{audit.name}-{role}')
+                    if target.snapshot.id != initial.id:
+                        raise ValueError('Audit target did not reopen the same native seed root')
+                    target.update(snapshot)
+                    target.set_scope({name: 'r' for name in target.component_rules})
+                    pair[role] = benchmark.grade(await target.rollout(splits['test'], snapshot=snapshot))
                 if tuple(row.task for row in pair[role]) != tuple(splits['test']):
                     raise ValueError('Native grading changed task membership or ordering')
                 write_json(self.directory/f'{audit.name}-{role}.json',
@@ -283,6 +326,9 @@ async def execute(args):
     from .searchqa_formal import COMMIT
 
     spec = load_spec(args.config)
+    evaluator_plugins(spec.get('evaluators',['native-paired-utility']),Path('.'))
+    if spec.get('cached_audits') and not spec.get('frozen'):
+        raise ValueError('Cached audit observations require sealed frozen evaluation')
     source_bench = native._BENCHMARKS[spec['source']['name']](spec['source'])
     source_splits = source_bench.load()
     if not source_splits['train'] or source_splits['test']:
@@ -316,7 +362,7 @@ async def execute(args):
     if not isinstance(worker_spec.get('instruction',''),str) or len(worker_spec.get('instruction',''))>8192:
         raise ValueError('Worker instruction must be bounded text')
     checked = native_preflight(spec,source_bench,budget,worker_spec)
-    plan = {**spec, 'runs_formal_eval': False, 'upstream_inventory_counts':
+    plan = {**spec, 'job_id':args.job_id, 'runs_formal_eval': False, 'upstream_inventory_counts':
             {key: len(value) for key, value in native_inventory().items()},
             'input_membership':membership,
             'budget_scope':'per transport; Chat and Messages have separate persistent ceilings',
@@ -384,7 +430,8 @@ async def execute(args):
             return native._BENCHMARKS[config['name']](config)
 
         audits = [AuditSpec(row['name'], row['benchmark']) for row in spec['audits']]
-        session = TrustSession(directory/'trust')
+        session = TrustSession(directory/'trust',evaluators=evaluator_plugins(
+                    spec.get('evaluators',['native-paired-utility']),directory/'trust'))
         if frozen:
             from flashrsi.core import Snapshot
             snapshots = {}
@@ -393,7 +440,11 @@ async def execute(args):
                 if digest(source)!=frozen[role]['sha256']:
                     raise ValueError('Frozen source snapshot hash mismatch')
                 snapshots[role] = Snapshot.load(source)
-            result = await session.audit(snapshots['initial'], snapshots['selected'], audits, target, benchmark)
+            from .composition_recovery import read_cache
+            cached=read_cache(spec,audits,benchmark)
+            write_json(directory/'audit-reuse.json',{'reused_roles':spec.get('cached_audits',[]),
+                        'source':spec.get('recovery'),'new_inference_roles':spec.get('recovery',{}).get('remaining_roles')})
+            result = await session.audit(snapshots['initial'], snapshots['selected'], audits, target, benchmark,cached_pairs=cached)
         else:
             cls = native._ALGORITHMS[spec['algorithm']['name']]
             if worker_spec['type']=='llm':
@@ -427,14 +478,34 @@ async def execute(args):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('inventory', 'plan', 'run', 'evaluate'))
+    parser.add_argument('action', choices=('inventory', 'plan', 'run', 'evaluate','inspect-recovery','recover-audit'))
+    parser.add_argument('--source-run',type=Path)
     parser.add_argument('--config', type=Path)
     parser.add_argument('--root', default='.')
     parser.add_argument('--job-id')
     parser.add_argument('--image')
+    parser.add_argument('--evaluators',help='Passive audit plugins for recovered observations; does not change native selection')
     args = parser.parse_args(argv)
     if args.action == 'inventory':
         print(json.dumps({'scope': 'upstream_available_not_all_runtime_verified', **native_inventory()}, indent=2))
+        return
+    if args.evaluators and args.action not in ('inspect-recovery','recover-audit'):
+        parser.error('--evaluators is a recovery override; for a new run set evaluators in its hashed configuration')
+    if args.action in ('inspect-recovery','recover-audit'):
+        if not args.source_run:parser.error('--source-run required')
+        from .composition_recovery import prepare
+        spec=prepare(args.source_run)
+        if args.evaluators:
+            spec['evaluators']=args.evaluators.split(',')
+            evaluator_plugins(spec['evaluators'],Path('.'))
+        if args.action=='inspect-recovery':
+            print(json.dumps({'recovery':spec['recovery'],'cached_audits':spec['cached_audits']},indent=2));return
+        if args.config:parser.error('Recovery derives its configuration from the sealed source; do not override --config')
+        args.image=args.image or spec['image']
+        if args.image!=spec['image']:parser.error('Recovery must retain the source target runtime image')
+        with tempfile.TemporaryDirectory(prefix='ftrsi-audit-recovery-') as temp:
+            config=Path(temp)/'config.json';write_json(config,spec)
+            main(['evaluate','--config',str(config),'--root',args.root,'--job-id',args.job_id or '', '--image',args.image])
         return
     if not args.config:
         parser.error('--config required')

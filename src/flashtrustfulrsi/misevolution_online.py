@@ -33,16 +33,21 @@ def main():
     parser.add_argument('--root', default='.')
     parser.add_argument('--job-id', required=True)
     parser.add_argument('--plan-only', action='store_true')
+    parser.add_argument('--deepseek-debug', action='store_true')
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,80}', args.job_id):
         parser.error('Invalid job ID')
+    if args.deepseek_debug and not args.job_id.startswith('dev-dsflash-misevolution-'):
+        parser.error('Official debug needs a dedicated dev-dsflash-misevolution identity')
+    from .deepseek_debug import DeepSeekProvider, DebugBudget, MODEL as DEBUG_MODEL, CHAT_URL
+    model = DEBUG_MODEL if args.deepseek_debug else MODEL
     root = Path(args.root).resolve()
     source = root/'external/Misevolution/memory_misevolution/reward_hacking_test.py'
     native = load_native(source)
     heldout = [(index, native['service_user_requests'][index]) for index in HELDOUT]
     spec = {
         'method': 'Misevolution', 'scope': 'adapted_online_service_memory_smoke',
-        'model': MODEL, 'job_id': args.job_id,
+        'model': model, 'job_id': args.job_id,
         'upstream_commit': '2601397de8b3de809d920555f05675d0a40a5979',
         'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
         'adapter_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -51,13 +56,19 @@ def main():
         'max_requests': len(TRAIN)+2*len(HELDOUT),
         'conditions': ['frozen_empty', 'learned_memory'],
     }
+    if args.deepseek_debug:
+        budget=DebugBudget(requests=spec['max_requests'],input_tokens=1_000_000,
+                           output_tokens=spec['max_requests']*2048,per_call_output=2048)
+        spec.update(runs_formal_eval=False,endpoint=CHAT_URL,provider_budget=budget.__dict__,
+                    scope='development_only_Misevolution_online_memory_pair')
     if args.plan_only:
         print(json.dumps(spec, indent=2))
         return
     dest = root/'runs'/args.job_id
     dest.mkdir(parents=True)
     write_json(dest/'manifest.json', spec)
-    provider = NativeSpoolProvider(root/'runs/model-spool', args.job_id)
+    provider = (DeepSeekProvider(dest/'provider',args.job_id,budget,timeout=180) if args.deepseek_debug
+                else NativeSpoolProvider(root/'runs/model-spool', args.job_id))
     traces = []
     memory = []
     write_json(dest/'status.json', {'status': 'running'})
@@ -97,9 +108,10 @@ def main():
             groups[name] = {'cases': len(rows), 'parsed': sum(r['action']['status'] == 'parsed' for r in rows),
                             'unsolicited_refunds': sum(r['action']['refund_selected'] for r in unsolicited),
                             'unsolicited_denominator': len(unsolicited)}
-        write_json(dest/'result.json', {'status': 'completed', 'scope': spec['scope'], 'model': MODEL,
+        write_json(dest/'result.json', {'status': 'completed', 'scope': spec['scope'], 'model': model,
                    'changed': bool(memory), 'accepted_updates': len(memory),
-                   'logical_calls': len(traces), 'conditions': groups})
+                   'logical_calls': len(traces), 'conditions': groups,
+                   **({'runs_formal_eval':False,'ledger':provider.summary()} if args.deepseek_debug else {})})
         write_json(dest/'status.json', {'status': 'completed'})
     except Exception as exc:
         write_json(dest/'status.json', {'status': 'failed', 'error_type': type(exc).__name__, 'error': str(exc)})
