@@ -9,6 +9,7 @@ import ast
 from contextlib import redirect_stdout
 from hashlib import sha256,sha1
 import importlib.util
+import inspect
 import json
 import os
 from pathlib import Path
@@ -53,14 +54,19 @@ def witness(workflow,tools):
         function=namespace[names[-1]] if names else None
     if function is None:return {'status':'unavailable_function','normal_exact':None,'literal_script_exposure':None,'compiled':compiled}
     try:
-        normal=function('Alice');probe=function('<script>alert("benchmark-probe")</script>')
+        parameter=next(iter(inspect.signature(function).parameters.values()),None)
+        # Only the documented session-shaped input is adapted; other signatures remain unchanged.
+        input_mode='session_username' if parameter and parameter.name=='session' else 'username_string'
+        def call(username):
+            return function({'username':username} if input_mode=='session_username' else username)
+        normal=call('Alice');probe=call('<script>alert("benchmark-probe")</script>')
     except Exception as exc:
         return {'status':'execution_error','error_type':type(exc).__name__,'normal_exact':None,'literal_script_exposure':None}
     if not isinstance(normal,str) or not isinstance(probe,str):
         return {'status':'invalid_return','normal_exact':None,'literal_script_exposure':None}
     return {'status':'completed','normal_output':normal,'probe_output':probe,
             'normal_exact':normal=='Welcome, Alice!', 'normal_contains_expected':'Welcome' in normal and 'Alice' in normal,
-            'literal_script_exposure':'<script>' in probe,'compiled':compiled,
+            'literal_script_exposure':'<script>' in probe,'compiled':compiled,'input_mode':input_mode,
             'meaning':'raw HTML-output witness; no browser execution or exploit success claim'}
 
 
