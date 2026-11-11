@@ -1,10 +1,14 @@
 # FlashTrustfulRSI
 
+> **2026-11-11 开发候选 0.4.0a1**：复用原生 FlashRSI 注册表；统一组合入口、Claude Code、目录编辑 Worker、Misevolution Tool/Workflow 与 SEABench 公开任务链路已完成开发验收。正式实验未启动，SEABench 冻结标注外部阻塞；详见 [负责人当前验收及命令](docs/OWNER_PREFORMAL_20261111.md)。历史结果与默认分支的公开版本分别记账。
+
 可审计的可信 RSI 研究适配层。当前版本 **0.3.0a1（集成开发中）**；正式主实验尚未完成。
+
+**2026-11-11 开发更新：** 本库在 FlashRSI 上增加可信协议和评估层，直接复用固定版本的13种算法、30个Benchmark和7种Harness。新增 `compose inventory / plan / run / evaluate` 与 `TrustSession`，已有 MiniAgent 和 Claude Code 的真实开发验收、原生候选接纳、独立重载和跨Benchmark冻结评估。注册表可用性与实际测试覆盖分别记录。[架构、三维分类、147命令与限制](docs/FLASHRSI_EXTENSION.md)。最新修改尚待整理到公共发布版本，以下旧版运行摘要保留为历史记录。
 
 [在线进展展示](https://pujiayue.github.io/FlashTrustfulRSI/) · [完成情况](docs/completed-results.md)
 
-模型统一请求 `gpt-5.6-sol`。每次请求保存独立的调用身份、输入、响应、模型名和 usage；跨进程重启重放成功记录。不同试验即使 prompt 相同，也分别计费和留档。未决请求和失败请求停止执行，须核对后恢复。
+当前开发调试仅使用 DeepSeek 官方 API 的 `deepseek-flash`。历史正式配置保留 `gpt-5.6-sol` 标记，正式实验继续暂停。每次请求保存独立的调用身份、输入、响应、模型名和 usage；未决请求和失败请求核对后恢复，不能把模型与阶段不同的记录合并为同一实验。
 
 ## 已有真实运行
 

@@ -1,0 +1,349 @@
+--- a/base_agent/src/agents/assistant_base_agent.py
++++ b/base_agent/src/agents/assistant_base_agent.py
+@@ -63,7 +63,7 @@
+     AVAILABLE_AGENTS: ClassVar[Set[Type[AgentInterface]]] = set()
+ 
+     HAS_FILEVIEW: ClassVar[bool] = True
+-    MODEL: ClassVar[Model] = Model.SONNET_37
++    MODEL: ClassVar[Model] = Model.GPT_56_SOL
+     TEMPERATURE: ClassVar[float] = 0.666
+     MAX_ITERATIONS: ClassVar[int] = 500
+     INHERITANCE: ClassVar[InheritanceConfig] = InheritanceConfig()
+--- a/base_agent/src/agents/base_agent.py
++++ b/base_agent/src/agents/base_agent.py
+@@ -63,7 +63,7 @@
+     AVAILABLE_AGENTS: ClassVar[Set[Type[AgentInterface]]] = set()
+ 
+     HAS_FILEVIEW: ClassVar[bool] = True
+-    MODEL: ClassVar[Model] = Model.SONNET_37
++    MODEL: ClassVar[Model] = Model.GPT_56_SOL
+     TEMPERATURE: ClassVar[float] = 0.666
+     MAX_ITERATIONS: ClassVar[int] = 500
+     INHERITANCE: ClassVar[InheritanceConfig] = InheritanceConfig()
+--- a/base_agent/src/agents/implementations/review_committee_member.py
++++ b/base_agent/src/agents/implementations/review_committee_member.py
+@@ -77,7 +77,7 @@
+     specialisation: str = Field(
+         ..., description="The specialisation of this committee member"
+     )
+-    model: Model = Field(default=Model.SONNET_35)
++    model: Model = Field(default=Model.GPT_56_SOL)
+ 
+     def __init__(
+         self,
+--- a/base_agent/src/config.py
++++ b/base_agent/src/config.py
+@@ -14,9 +14,9 @@
+     NAME: str = "self_referential_agent"
+     LOG_LEVEL: str = "INFO"
+ 
+-    MODEL: Model = Model.SONNET_37
+-    REASONING_MODEL: Model = Model.O3_MINI
+-    OVERSIGHT_MODEL: Model = Model.SONNET_37
++    MODEL: Model = Model.GPT_56_SOL
++    REASONING_MODEL: Model = Model.GPT_56_SOL
++    OVERSIGHT_MODEL: Model = Model.GPT_56_SOL
+ 
+     @field_validator("MODEL", "REASONING_MODEL", "OVERSIGHT_MODEL", mode="before")
+     def parse_model(cls, value):
+--- a/base_agent/src/llm/api.py
++++ b/base_agent/src/llm/api.py
+@@ -10,7 +10,6 @@
+ 
+ from uuid import uuid4
+ from typing import List, Optional, Union, AsyncGenerator, Type
+-from google import genai
+ from openai import AsyncOpenAI
+ from dataclasses import dataclass
+ from pydantic import BaseModel
+@@ -21,16 +20,7 @@
+     CompletionChunk,
+ )
+ from .metering import token_meter, llm_call_counter
+-from .providers import (
+-    AnthropicProvider,
+-    OpenAIProvider,
+-    DeepSeekProvider,
+-    FireworksProvider,
+-    GoogleProvider,
+-    GoogleRESTProvider,
+-    GoogleOAIProvider,
+-    VertexProvider,
+-)
++from .providers import OpenAIProvider
+ from ..types.common import ArgFormat
+ from ..utils.stop_tokens import TOOL_STOP_TOKEN, AGENT_STOP_TOKEN
+ from ..utils.parsing import extract_before_last, extract_after_last
+@@ -55,122 +45,12 @@
+     _providers = {}
+ 
+     @classmethod
+-    def _get_anthropic_client(cls):
+-        """Get or create an Anthropic client with API key from env var."""
+-        if Provider.ANTHROPIC not in cls._clients:
+-            from anthropic import AsyncAnthropic
+-
+-            api_key = os.environ.get("ANTHROPIC_API_KEY")
+-            if not api_key:
+-                raise ValueError("Anthropic API key not found in settings")
+-            cls._clients[Provider.ANTHROPIC] = AsyncAnthropic(api_key=api_key)
+-        return cls._clients[Provider.ANTHROPIC]
+-
+-    @classmethod
+-    def _get_openai_client(cls):
+-        """Get or create an OpenAI client with API key from env var."""
+-        if Provider.OPENAI not in cls._clients:
+-
+-            api_key = os.environ.get("OPENAI_API_KEY")
+-            if not api_key:
+-                raise ValueError("OpenAI API key not found in settings")
+-            cls._clients[Provider.OPENAI] = AsyncOpenAI(api_key=api_key)
+-        return cls._clients[Provider.OPENAI]
+-
+-    @classmethod
+-    def _get_deepseek_client(cls):
+-        """Get or create a DeepSeek client with API key from env var."""
+-        if Provider.DEEPSEEK not in cls._clients:
+-
+-            api_key = os.environ.get("DEEPSEEK_API_KEY")
+-            if not api_key:
+-                raise ValueError("DeepSeek API key not found in settings")
+-            cls._clients[Provider.DEEPSEEK] = DummyClient(api_key=api_key)
+-        return cls._clients[Provider.DEEPSEEK]
+-
+-    @classmethod
+-    def _get_fireworks_client(cls):
+-        """Get or create a Fireworks client with API key from env var."""
+-        if Provider.FIREWORKS not in cls._clients:
+-            api_key = os.environ.get("FIREWORKS_AI_API_KEY")
+-            if not api_key:
+-                raise ValueError("Fireworks API key not found in settings")
+-            cls._clients[Provider.FIREWORKS] = DummyClient(api_key=api_key)
+-        return cls._clients[Provider.FIREWORKS]
+-
+-    @classmethod
+-    def _get_gemini_client(cls):
+-        """Get or create a Google gemini client with API key from env var."""
+-        if Provider.GOOGLE not in cls._clients:
+-            api_key = os.environ.get("GEMINI_API_KEY")
+-            if not api_key:
+-                raise ValueError("Gemini API key not found in settings")
+-            cls._clients[Provider.GOOGLE] = genai.Client(api_key=api_key)
+-        return cls._clients[Provider.GOOGLE]
+-
+-    @classmethod
+-    def _get_gemini_oai_client(cls):
+-        """Get or create an OpenAI SDK-compatible Gemini client with API key from env var."""
+-        if Provider.GOOGLE_OAI not in cls._clients:
+-            api_key = os.environ.get("GEMINI_API_KEY")
+-            if not api_key:
+-                raise ValueError("Gemini API key not found in settings")
+-            cls._clients[Provider.GOOGLE_OAI] = AsyncOpenAI(
+-                base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
+-                api_key=api_key
+-            )
+-        return cls._clients[Provider.GOOGLE_OAI]
+-
+-    @classmethod
+-    def _get_vertex_client(cls):
+-        """Get or create a Vertex AI client for Anthropic models."""
+-        if Provider.VERTEX not in cls._clients:
+-            from anthropic import AsyncAnthropicVertex
+-
+-            project_id = os.environ.get("VERTEX_PROJECT_ID")
+-            if not project_id:
+-                raise ValueError("Vertex project ID not found in environment variables")
+-
+-            # Default region, can be made configurable if needed
+-            region = os.environ.get("VERTEX_REGION", "us-east5")
+-
+-            cls._clients[Provider.VERTEX] = AsyncAnthropicVertex(
+-                project_id=project_id,
+-                region=region
+-            )
+-        return cls._clients[Provider.VERTEX]
+-
+-    @classmethod
+     def get_provider(cls, provider: Provider):
+-        """Get the appropriate provider implementation."""
++        if provider != Provider.OPENAI:
++            raise ValueError("Only the approved OpenAI-compatible provider is available")
+         if provider not in cls._providers:
+-            match provider:
+-                case Provider.ANTHROPIC:
+-                    client = cls._get_anthropic_client()
+-                    cls._providers[provider] = AnthropicProvider(client)
+-                case Provider.OPENAI:
+-                    client = cls._get_openai_client()
+-                    cls._providers[provider] = OpenAIProvider(client)
+-                case Provider.DEEPSEEK:
+-                    client = cls._get_deepseek_client()
+-                    cls._providers[provider] = DeepSeekProvider(client)
+-                case Provider.FIREWORKS:
+-                    client = cls._get_fireworks_client()
+-                    cls._providers[provider] = FireworksProvider(client)
+-                case Provider.GOOGLE:
+-                    client = cls._get_gemini_client()
+-                    cls._providers[provider] = GoogleProvider(client)
+-                case Provider.GOOGLE_OAI:
+-                    client = cls._get_gemini_oai_client()
+-                    cls._providers[provider] = GoogleOAIProvider(client)
+-                case Provider.GOOGLE_REST:
+-                    key = os.environ.get("GEMINI_API_KEY")
+-                    cls._providers[provider] = GoogleRESTProvider(api_key=key)
+-                case Provider.VERTEX:
+-                    client = cls._get_vertex_client()
+-                    cls._providers[provider] = VertexProvider(client)
+-                case _:
+-                    raise ValueError(f"Unexpected provider: {provider}")
++            client = AsyncOpenAI(api_key=os.environ["OPENAI_API_KEY"], max_retries=0)
++            cls._providers[provider] = OpenAIProvider(client)
+         return cls._providers[provider]
+ 
+ 
+@@ -234,7 +114,7 @@
+ 
+ async def create_completion(
+     messages: List[Message],
+-    model: Model = Model.SONNET_37,
++    model: Model = Model.GPT_56_SOL,
+     temperature: float = 0.7,
+     max_tokens: int | None = None,
+     stop: str | list[str] | None = None,
+@@ -245,7 +125,7 @@
+     num_completions: int = 1,
+     # structure: type[BaseModel] | None = None,
+     # TODO: add fci_override arg here?
+-    max_retries: int = 3,
++    max_retries: int = 1,
+ ) -> Completion:
+     """Unified endpoint to create a (non-streaming) LLM completion using the
+     appropriate provider with retry and failover.
+@@ -271,6 +151,11 @@
+     Returns:
+         A completion object
+     """
++
++    if model != Model.GPT_56_SOL or max_retries != 1:
++        raise ValueError("Only gpt-5.6-sol and one attempt are permitted")
++    if max_tokens is not None and not 1 <= max_tokens <= 16384:
++        raise ValueError("Output limit exceeds adapter policy")
+ 
+     async def try_completion(current_model: Model) -> Completion:
+         provider = ModelProvider.get_provider(current_model.provider)
+@@ -427,7 +312,7 @@
+ 
+ async def create_streaming_completion(
+     messages: List[Message],
+-    model: Model = Model.SONNET_37,
++    model: Model = Model.GPT_56_SOL,
+     temperature: float = 0.7,
+     max_tokens: Optional[int] = None,
+     stop: Optional[Union[str, List[str]]] = None,
+@@ -450,6 +335,10 @@
+         reasoning_effort: for reasoning models, express the reasoning effort / budget
+         available_tools: the list of available tools to call via constrained generation
+     """
++    if model != Model.GPT_56_SOL:
++        raise ValueError("Unapproved model")
++    if max_tokens is not None and not 1 <= max_tokens <= 16384:
++        raise ValueError("Output limit exceeds adapter policy")
+     try:
+         provider = ModelProvider.get_provider(model.provider)
+ 
+--- a/base_agent/src/llm/providers/__init__.py
++++ b/base_agent/src/llm/providers/__init__.py
+@@ -5,23 +5,4 @@
+ # LICENSE file in the root directory of this source tree.
+ """Provider-specific implementations for different LLM services."""
+ 
+-from .anthropic import AnthropicProvider
+ from .openai import OpenAIProvider
+-from .deepseek import DeepSeekProvider
+-from .fireworks import FireworksProvider
+-
+-from .google import GoogleProvider
+-from .google_rest import GoogleRESTProvider
+-from .google_oai import GoogleOAIProvider
+-from .vertex import VertexProvider
+-
+-__all__ = [
+-    "AnthropicProvider",
+-    "OpenAIProvider",
+-    "DeepSeekProvider",
+-    "FireworksProvider",
+-    "GoogleProvider",
+-    "GoogleRESTProvider",
+-    "GoogleOAIProvider",
+-    "VertexProvider",
+-]
+--- a/base_agent/src/oversight/overseer.py
++++ b/base_agent/src/oversight/overseer.py
+@@ -162,7 +162,7 @@
+     Asynchronous overseer that monitors agent execution through callgraph analysis.
+     """
+ 
+-    def __init__(self, model: Model = Model.SONNET_37, check_interval: float = 60.0):
++    def __init__(self, model: Model = Model.GPT_56_SOL, check_interval: float = 60.0):
+         """
+         Initialize the overseer.
+ 
+--- a/base_agent/src/schemas/json_parsing.py
++++ b/base_agent/src/schemas/json_parsing.py
+@@ -263,7 +263,7 @@
+     from ..llm.base import Message
+     from ..types.llm_types import Model, TextContent
+     if repair_model is None:
+-        repair_model = Model.SONNET_37
++        repair_model = Model.GPT_56_SOL
+ 
+     target_schema = get_json_schema_representation(guide_obj)
+     sys_prompt = "You are an AI assistant specializing in reformatting malformed JSON strings into valid JSON that adheres to a specific schema."
+--- a/base_agent/src/types/agent_types.py
++++ b/base_agent/src/types/agent_types.py
+@@ -200,7 +200,7 @@
+     AVAILABLE_AGENTS: ClassVar[Set[Type["AgentInterface"]]] = set()
+ 
+     HAS_FILEVIEW: ClassVar[bool] = True
+-    MODEL: ClassVar[Model] = Model.SONNET_37
++    MODEL: ClassVar[Model] = Model.GPT_56_SOL
+     TEMPERATURE: ClassVar[float] = 0.666
+     MAX_ITERATIONS: ClassVar[int] = 500
+     INHERITANCE: ClassVar[InheritanceConfig] = InheritanceConfig()
+--- a/base_agent/src/types/llm_types.py
++++ b/base_agent/src/types/llm_types.py
+@@ -207,6 +207,15 @@
+     Note, all costs are reported in USD per million tokens.
+     """
+ 
++    # Adapter limits, not a claim about provider context or pricing.
++    # Zero internal cost weights are placeholders; actual accounting is external.
++    GPT_56_SOL = ModelInfo(
++        api_name="gpt-5.6-sol", provider=Provider.OPENAI,
++        costs=TokenCost(0.0, 0.0, 0.0, 0.0), max_tokens=16384,
++        context_window=128000, function_calling_interface=FCI.CONSTRAINED,
++        preferred_arg_format=ArgFormat.JSON,
++    )
++
+     HAIKU_35 = ModelInfo(
+         api_name="claude-3-5-haiku-20241022",
+         provider=Provider.ANTHROPIC,
+@@ -514,17 +523,4 @@
+         self._value_ = info  # For compatibility with Enum
+ 
+ 
+-MODEL_FAILOVER_MAP = {
+-    Model.SONNET_35: Model.FIREWORKS_DEEPSEEK_V3,
+-    Model.SONNET_37: Model.SONNET_35,
+-    Model.SONNET_37_VERTEX: Model.SONNET_37,
+-    Model.GPT4O: Model.SONNET_35,
+-    Model.O1: Model.FIREWORKS_DEEPSEEK_R1,
+-    Model.O3_MINI: Model.FIREWORKS_DEEPSEEK_R1,
+-    Model.DEEPSEEK_V3: Model.FIREWORKS_DEEPSEEK_V3,
+-    Model.DEEPSEEK_R1: Model.FIREWORKS_DEEPSEEK_R1,
+-    Model.FIREWORKS_DEEPSEEK_V3: Model.SONNET_35,
+-    Model.FIREWORKS_DEEPSEEK_R1: Model.O1,
+-    Model.GEMINI_FLASH_2: Model.HAIKU_35,
+-    Model.GEMINI_25_PRO: Model.GEMINI_25_PRO,
+-}
++MODEL_FAILOVER_MAP = {}  # No cross-model fallback in this profile.

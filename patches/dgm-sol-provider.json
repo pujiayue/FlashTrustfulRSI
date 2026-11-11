@@ -1,0 +1,21 @@
+{
+  "changes": [
+    {
+      "path": "llm.py",
+      "before": "ca6ac22d7f128180de398cec48b9f5cc1f1f49f3bf1a8e935025588d8b09570d",
+      "after": "37b4c7b25b2376b1015397a0e5e999bdcc6d8b0183d0d097bb955d54838f275b"
+    },
+    {
+      "path": "llm_withtools.py",
+      "before": "b6fa4ee18ad8b42767f7cad68bf8ed7f7937dcfaf32b85757182979bdb895836",
+      "after": "149ee859ce0df658aff03c3347ad85da3687fb3aaa36316ab49b0fbf95e890a3"
+    }
+  ],
+  "deviations": [
+    "all model roles use gpt-5.6-sol; original OpenAI Responses tool loop selected",
+    "explicit 16384 output cap for tool calls; no inner recursive retries",
+    "fix non-function final responses being incorrectly interpreted as tools",
+    "retain complete Responses output items in wire history",
+    "surface native tool-loop exceptions rather than silently swallowing failures"
+  ]
+}

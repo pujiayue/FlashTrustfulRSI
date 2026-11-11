@@ -1,0 +1,23 @@
+{
+  "upstream_commit": "59a68f672dfb92c74aeb7e61535d776fb36e172d",
+  "published_patch_sha256": "a983709c1f1b374bdb486ebaee29eea113eb5a11aadb1e574323b8371e0c5a0c",
+  "modified_files": [
+    "agent/llm.py"
+  ],
+  "provider_patch_sha256": "6334a10e38e3c3fa5530bd0a544dec7810f14513f714b91ca79defdd62674750",
+  "model": "gpt-5.6-sol",
+  "changes": [
+    "all roles use sole authorized model",
+    "OpenAI SDK transport instead of LiteLLM; native text-history conversion retained",
+    "no network retries or silent parameter dropping",
+    "16384 output cap; incomplete completions fail explicitly"
+  ],
+  "unchanged": [
+    "TaskAgent.forward",
+    "MetaAgent.forward",
+    "chat_with_agent",
+    "JSON tool-call parser",
+    "bash/edit tools",
+    "native 40 tool-call limit"
+  ]
+}

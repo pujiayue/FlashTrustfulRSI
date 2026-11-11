@@ -10,6 +10,12 @@ from flashtrustfulrsi.sandbox import DockerSandbox, SandboxUnavailable
 
 
 class SandboxTests(unittest.TestCase):
+    def test_semantic_runtime_keeps_isolation_with_explicit_memory(self):
+        sandbox=DockerSandbox(image='sha256:'+'a'*64,memory_mib=2048,tmpfs_mib=256)
+        argv=sandbox.command(['true'],name='ftrsi-semantic')
+        self.assertIn('--memory=2048m',argv);self.assertIn('--network=none',argv)
+        self.assertIn('--tmpfs=/tmp:rw,noexec,nosuid,size=256m',argv)
+        with self.assertRaises(ValueError):DockerSandbox(memory_mib=0)
     def setUp(self):
         self.sandbox = DockerSandbox(image="sha256:" + "a" * 64)
 

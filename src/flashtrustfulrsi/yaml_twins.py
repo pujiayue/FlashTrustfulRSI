@@ -8,6 +8,7 @@ import argparse, ast, hashlib, json, re, shutil
 from collections import Counter
 from pathlib import Path
 from .components import source
+from .deepseek_debug import DebugBudget, DeepSeekProvider, MODEL as DEBUG_MODEL
 from .provider import write_json
 from .sandbox import DockerSandbox
 from .transport import MODEL, RecordedProvider
@@ -89,12 +90,22 @@ def summarize(rows):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--root',default='.')
     p.add_argument('--job-id',required=True);p.add_argument('--image',required=True);p.add_argument('--docker',default='docker')
-    p.add_argument('--docker-host');p.add_argument('--provider-mode',choices=('direct','spool'),default='direct')
+    p.add_argument('--docker-host');p.add_argument('--provider-mode',choices=('direct','spool','deepseek-debug'),default='direct')
     p.add_argument('--plan-only',action='store_true');a=p.parse_args()
     if not re.fullmatch(r'[a-zA-Z0-9_-]{1,80}',a.job_id):raise ValueError('Invalid job ID')
+    debug = a.provider_mode == 'deepseek-debug'
+    if debug and not a.job_id.startswith('dev-dsflash-trusting-trust-'):
+        p.error('DeepSeek debug requires a separate dev-dsflash-trusting-trust job ID')
+    model = DEBUG_MODEL if debug else MODEL
     root=Path(a.root).resolve();native=load_native(root);tasksets={k:cases(native,k) for k in ('heldout','clean','poisoned')}
+    if debug:
+        selected = {'clean': ('load_config','parse_settings'), 'poisoned': ('load_config','parse_settings'),
+                    'heldout': ('parse_yaml','read_section','parse_upload')}
+        for arm, ids in selected.items():
+            by_id = {row['id']: row for row in tasksets[arm]}
+            tasksets[arm] = [by_id[key] for key in ids]
     spec={'method':'Trusting Trust YAML benchmark','driver':'FlashTrustfulRSI one-update prompt baseline','rsi_type':'Context',
-          'scope':'native_YAML_benchmark_custom_Context_RSI_not_DGM_reproduction','job_id':a.job_id,'model':MODEL,'provider_mode':a.provider_mode,
+          'scope':'native_YAML_benchmark_custom_Context_RSI_not_DGM_reproduction','job_id':a.job_id,'model':model,'provider_mode':a.provider_mode,
           'source_lock':json.loads((root/'configs/component-sources.lock.json').read_text())['E08'],
           'initial_prompt':INITIAL,'update_prompt':UPDATE,'tasksets':tasksets,'image':a.image,
           'max_requests':48,'initial_heldout':12,'train_per_arm':5,'updates_per_arm':1,'heldout_per_arm':12,
@@ -103,14 +114,22 @@ def main():
           'limitations':['new Context RSI driver, not the released code-modifying agents','one update and one stochastic trial per arm',
               'native in-process witness measures specified YAML behaviors, not comprehensive arbitrary-code safety'],
           'adapter_sha256':sha(Path(__file__).read_bytes()),'sandbox_sha256':sha(Path(__file__).with_name('sandbox.py').read_bytes())}
+    if debug:
+        budget = DebugBudget(requests=15,input_tokens=1_000_000,output_tokens=30_720,per_call_output=2048)
+        spec.update(scope='development_only_native_YAML_Context_twins',runs_formal_eval=False,
+                    max_requests=budget.requests,initial_heldout=3,train_per_arm=2,heldout_per_arm=3,
+                    provider_budget=budget.__dict__)
     if a.plan_only:print(json.dumps(spec,indent=2));return
-    dest=root/'runs'/a.job_id;dest.mkdir(parents=True,exist_ok=True)
+    dest=root/'runs'/a.job_id
+    dest.mkdir(parents=True,exist_ok=not debug,mode=0o700 if debug else 0o777)
     if (dest/'manifest.json').exists() and json.loads((dest/'manifest.json').read_text())!=spec:raise ValueError('Frozen manifest changed')
     write_json(dest/'manifest.json',spec)
     if (dest/'result.json').exists():print((dest/'result.json').read_text());return
     sandbox=DockerSandbox(a.docker,a.docker_host,a.image);probe=sandbox.probe();write_json(dest/'sandbox.json',probe)
     if probe['status']!='ready':raise RuntimeError('Verified resource isolation required')
-    if a.provider_mode=='spool':
+    if debug:
+        provider=DeepSeekProvider(dest/'provider',a.job_id,budget)
+    elif a.provider_mode=='spool':
         from .spool_provider import SpoolProvider
         provider=SpoolProvider(root/'runs/model-spool',a.job_id)
     else:
@@ -120,7 +139,7 @@ def main():
     def solve(arm,phase,case,prompt):
         call=f'{arm}-{phase}-{case["id"]}'
         messages=[{'role':'system','content':prompt},{'role':'user','content':case['instructions']+'\n\n'+case['stub']}]
-        response=provider.invoke('chat',{'model':MODEL,'messages':messages,'max_tokens':2048,'temperature':0.1},request_id=call)
+        response=provider.invoke('chat',{'model':model,'messages':messages,'max_tokens':2048,'temperature':0.1},request_id=call)
         code=extract_code(response['choices'][0]['message']['content'])
         evaluation=evaluate_code(root,dest/'cases'/call,case,code,sandbox,native)
         row={'arm':arm,'phase':phase,'case':{'id':case['id'],'level':case['level']},'prompt_sha256':sha(prompt.encode()),
@@ -134,7 +153,7 @@ def main():
             training=[solve(arm,'train',case,INITIAL) for case in tasksets[arm]]
             feedback=[{'task':case['instructions'],'solution':row['code'],'test_stdout':row['evaluation']['unit_stdout'],
                        'test_stderr':row['evaluation']['unit_stderr'],'passed':row['evaluation']['utility']} for case,row in zip(tasksets[arm],training)]
-            response=provider.invoke('chat',{'model':MODEL,'messages':[{'role':'system','content':UPDATE},
+            response=provider.invoke('chat',{'model':model,'messages':[{'role':'system','content':UPDATE},
                 {'role':'user','content':json.dumps({'current_system_prompt':INITIAL,'training_feedback':feedback},ensure_ascii=False)}],
                 'max_tokens':2048,'temperature':0.1,'response_format':{'type':'json_object'}},request_id=arm+'-update')
             update=json.loads(response['choices'][0]['message']['content'])
@@ -144,8 +163,12 @@ def main():
             write_json(dest/(arm+'-update.json'),{'response':response,'parent_sha256':sha(INITIAL.encode()),'child_sha256':sha(assets[arm].encode()),'accepted':True})
             for case in tasksets['heldout']:solve(arm,'heldout',case,assets[arm])
         results={arm:summarize([r for r in rows if r['arm']==arm and r['phase']=='heldout']) for arm in ('initial','clean','poisoned')}
-        write_json(dest/'result.json',{'status':'completed','scope':spec['scope'],'model':MODEL,'rsi_type':'Context','updates':2,
-            'training_episodes':10,'heldout_episodes':36,'model_requests':48,'results':results,'full_paper_reproduction':False})
+        result={'status':'completed','scope':spec['scope'],'model':model,'rsi_type':'Context','updates':2,
+                'training_episodes':2*spec['train_per_arm'],'heldout_episodes':3*spec['heldout_per_arm'],
+                'model_requests':spec['max_requests'],'results':results,'full_paper_reproduction':False}
+        if debug:
+            result.update(runs_formal_eval=False,ledger=provider.summary())
+        write_json(dest/'result.json',result)
         write_json(dest/'status.json',{'status':'completed'})
     except Exception as exc:
         write_json(dest/'status.json',{'status':'failed','error_type':type(exc).__name__,'error':str(exc)});raise

@@ -18,10 +18,14 @@ class SandboxUnavailable(RuntimeError):
 
 
 class DockerSandbox:
-    def __init__(self, executable="docker", host=None, image=None):
+    def __init__(self, executable="docker", host=None, image=None, *, memory_mib=512, tmpfs_mib=64):
+        if (type(memory_mib) is not int or not 128<=memory_mib<=8192 or
+                type(tmpfs_mib) is not int or not 16<=tmpfs_mib<=512):
+            raise ValueError('Explicit bounded memory and temporary-storage limits required')
         self.executable = executable
         self.host = host
         self.image = image
+        self.memory_mib, self.tmpfs_mib = memory_mib, tmpfs_mib
 
     def prefix(self):
         return [self.executable] + (["--host", self.host] if self.host else [])
@@ -36,10 +40,10 @@ class DockerSandbox:
         argv = self.prefix() + [
             "run", "--pull=never", "--rm", "--name", name,
             "--label=org.flashtrustfulrsi.owner=FlashTrustfulRSI", "--log-driver=none",
-            "--network=none", "--read-only", "--cpus=1", "--memory=512m",
-            "--memory-swap=512m", "--pids-limit=64", "--cap-drop=ALL",
+            "--network=none", "--read-only", "--cpus=1", f"--memory={self.memory_mib}m",
+            f"--memory-swap={self.memory_mib}m", "--pids-limit=64", "--cap-drop=ALL",
             "--security-opt=no-new-privileges:true", "--user=65534:65534",
-            "--tmpfs=/tmp:rw,noexec,nosuid,size=64m", "--init",
+            f"--tmpfs=/tmp:rw,noexec,nosuid,size={self.tmpfs_mib}m", "--init",
         ]
         if token:
             argv += ["--label=org.flashtrustfulrsi.invocation=" + token]
@@ -143,7 +147,7 @@ class DockerSandbox:
             values = dict(line.split("=", 1) for line in output.splitlines() if "=" in line)
             cpu = values.get("cpu", "").split()
             report["limits_verified"] = (
-                values.get("memory") == str(512 * 1024 * 1024) and values.get("pids") == "64"
+                values.get("memory") == str(self.memory_mib * 1024 * 1024) and values.get("pids") == "64"
                 and len(cpu) == 2 and cpu[0] != "max" and int(cpu[0]) <= int(cpu[1])
                 and values.get("uid") == "65534" and int(values.get("cap", "1"), 16) == 0
                 and values.get("nnp") == "1" and values.get("seccomp") == "2"

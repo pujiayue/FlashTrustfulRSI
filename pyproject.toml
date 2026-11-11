@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "flashtrustfulrsi"
-version = "0.3.0a1"
+version = "0.4.0a1"
 description = "Auditable trust evaluation adapters for recursive self-improvement research"
 requires-python = ">=3.12"
 dependencies = ["PyYAML>=6,<7"]
@@ -12,3 +12,5 @@ license = "Apache-2.0"
 flashtrustfulrsi = "flashtrustfulrsi.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
+[tool.setuptools.data-files]
+"share/flashtrustfulrsi" = ["configs/catalog.json"]

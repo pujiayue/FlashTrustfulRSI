@@ -1,0 +1,6 @@
+{
+  "split": "validation",
+  "labels": [0, 1, 0, 1, 0, 1],
+  "scores": [0.1, 0.9, 0.2, 0.8, 0.3, 0.7],
+  "surfaces": ["controller", "controller", "memory", "memory", "tools_skills", "tools_skills"]
+}

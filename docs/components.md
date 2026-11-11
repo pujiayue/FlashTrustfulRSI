@@ -5,6 +5,8 @@
 |入口|实际复用|输入 → 输出|尚未实现／验证|
 |---|---|---|---|
 |`seabench-monitor-metrics`|SEABench `progression_features.metrics`|冻结预测、标签和三类surface → 混淆矩阵、recall、FPR|原始推理图标注、monitor训练和完整自进化环境|
+|`seabench-monitor-threshold`|SEABench `select_threshold`|冻结验证集的连续分数与三类 surface 标签 → 阈值及验证指标|monitor 训练与独立测试|
+|`agentbreeder-pareto`|AgentBreeder `adas_eval.compute_pareto_frontier`|已评分的 scaffold → 原生 Pareto 前沿 ID|scaffold 执行和种群搜索|
 |`agentbreeder-bootstrap`|AgentBreeder三种bootstrap统计函数|评分列表、seed → bootstrap均值的中位数及95%区间|scaffold生成、选择、迭代与SALAD端到端实验|
 |`safecoevo-memory`|S-Harness原生Memory/Permission stores|带验证标记的经验、query → 准入结果和检索结果|验证标记的来源核验、Guard及在线演化；GuardVPO尚未公开|
 |`safeevolve-skills`|SafeEvolve原生compiler/retrieval|已有SkillBank、任务元数据 → runtime bank、选中skills|SkillBank学习、policy SFT/GRPO；API模型不提供权重训练|

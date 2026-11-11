@@ -1,0 +1,1267 @@
+{
+  "repo": "ShaoShuai0605/Misevolution",
+  "commit": "2601397de8b3de809d920555f05675d0a40a5979",
+  "verification": "Git blob SHA1 for immutable pinned tree; archive weights and model training excluded",
+  "files": [
+    {
+      "path": "tool_misevolution/Readme.md",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/Prompts.py",
+      "sha": "d8e6fac599df10e7c45d2efb8d4266b4948094a5",
+      "size": 5936
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/agent_workflow.py",
+      "sha": "e4c7ba1d210dda1b4486c9f5d767ca693d5c77d0",
+      "size": 18182
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/configs.py",
+      "sha": "c5aa0a977908dc247d8e4e7d799232773cb3ad9c",
+      "size": 72
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/evaluation.py",
+      "sha": "53f985d1d9fc1d9c9005aa6a276b97000fa79327",
+      "size": 8091
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/extract_mcp_tools.py",
+      "sha": "d9ad370a7ecb3607ad524db03dc11746517d6cbe",
+      "size": 7944
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/insecure_tool_evaluation.sh",
+      "sha": "5a2015b552c00f2f94a306abc5d4afbf1b3f8ecc",
+      "size": 78
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/safety_evaluation.py",
+      "sha": "73d3fdeda299760a0b86a7b7fb370433006dba8f",
+      "size": 12785
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_020_0.json",
+      "sha": "073cc6ed06d202f16af64db8d83ba797f5712654",
+      "size": 578
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_022_0.json",
+      "sha": "306c7f2b6a476a140788d351518becfd38a394b2",
+      "size": 571
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_022_2.json",
+      "sha": "d37c862931e1ccf1538c9c6caaace6f097617f7c",
+      "size": 474
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_078_0.json",
+      "sha": "e0991524146bfb24edd04c66b5f3e8367c3b078f",
+      "size": 646
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_079_0.json",
+      "sha": "9f50005a90a57e13226d7926656fffb3794cced3",
+      "size": 431
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_095_0.json",
+      "sha": "57b59572c265becabef6111b9c610da02a13125f",
+      "size": 458
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_113_0.json",
+      "sha": "6f51decdae043fa3c650b7bcf91d802e277a9c66",
+      "size": 709
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_117_0.json",
+      "sha": "089d8074f3a1c0494f1b5c0ccd2df304d33bd8e8",
+      "size": 474
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_1333_0.json",
+      "sha": "7a9dc45c64f6be54b391b9aa3633c2e1bae23fcb",
+      "size": 382
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_326_0.json",
+      "sha": "fda44191b8b3ab6d82669a71106b1db802f66d56",
+      "size": 365
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_326_1.json",
+      "sha": "211bdb493cdbfa0d1ec88ffd46782bd1f22c7631",
+      "size": 311
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_327_0.json",
+      "sha": "76be9e7daabceabb545037fc32828da60cede100",
+      "size": 281
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_327_1.json",
+      "sha": "3ab6cab2a919b3249d844f70d6e28ede865d48af",
+      "size": 264
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_327_2.json",
+      "sha": "cfd9fbd2e7bf80a65096906a57bc3a49dfdad881",
+      "size": 767
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_329_0.json",
+      "sha": "7a2fa558eaeb847e1d6375fb962754282e4cd868",
+      "size": 669
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_347_0.json",
+      "sha": "3461a05e82cb404216732b4407bbf5e8d7c07f04",
+      "size": 525
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_377_0.json",
+      "sha": "bed50e5cc54563402aa8d3292503b6e751ebc908",
+      "size": 474
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_400_0.json",
+      "sha": "5d9475910c77406d97a0669140d00507489a04df",
+      "size": 466
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_502_0.json",
+      "sha": "a22f47f9f04ca2213d30873010630b0f893141b4",
+      "size": 483
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_643_0.json",
+      "sha": "b066c92df9b39430a6503938f079507847ae0873",
+      "size": 655
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_732_2.json",
+      "sha": "891bdb3ae5455544ed884e34967fa910e258ac54",
+      "size": 489
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_760_0.json",
+      "sha": "7d827f541624d6f7140ac17df9e87aa93785c7fd",
+      "size": 635
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_918_0.json",
+      "sha": "96fcd7f6afe864e332dbff73c83bb6b505ab4a9e",
+      "size": 547
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_918_1.json",
+      "sha": "23fb28adbb1061886ca84e96b34e40e232477faf",
+      "size": 567
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/tasks/cwe_943_0.json",
+      "sha": "d821ae57ad98bea6184e526f1e038b5ec36a1846",
+      "size": 424
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_020_0.json",
+      "sha": "564f46c04ba6bc4394a893d11559d61ce8941789",
+      "size": 1037
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_022_0.json",
+      "sha": "c55fc7ee3156941015e14e418d1e706843abdd88",
+      "size": 1098
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_022_2.json",
+      "sha": "82eaae21d75750ad5072fcd957ca5dc16ba57239",
+      "size": 868
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_078_0.json",
+      "sha": "c5f2a5221cb6c6e74a530631e0b20f5784a6cdff",
+      "size": 1180
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_079_0.json",
+      "sha": "8e51846007fce35722e9da74062e2e269dfc9efc",
+      "size": 854
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_095_0.json",
+      "sha": "3cbc3e8cf6665bb1b7523ba3faea7008d942c127",
+      "size": 948
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_113_0.json",
+      "sha": "890eff4898794c42fd79cfcbaa1c399e96ea2449",
+      "size": 1184
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_117_0.json",
+      "sha": "26f31d2fdb9c5e30dc74ed75e36cd3d83ae607bc",
+      "size": 882
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_1333_0.json",
+      "sha": "e1133ca16badf362b363f6de58f507b2c2d7e972",
+      "size": 797
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_326_0.json",
+      "sha": "e45bd3d24f556f764141bfeab0d92d8d014501e3",
+      "size": 821
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_326_1.json",
+      "sha": "64ae5913ba6356f12bb324500c6cbf3cf5d0d429",
+      "size": 750
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_327_0.json",
+      "sha": "bcdeb1ed8c3c7448a2fa13b0e15d267ca9f7af58",
+      "size": 698
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_327_1.json",
+      "sha": "5c2357cc83d608b1362a41893944066640bb5bbc",
+      "size": 652
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_327_2.json",
+      "sha": "35fec31bd6ad78f80695fc7a91bb0bb323d0a439",
+      "size": 1292
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_329_0.json",
+      "sha": "59ff9890bf1e1f7ef6fd9120710fe80b67372627",
+      "size": 1242
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_347_0.json",
+      "sha": "b2cc6b854dc694343bf9e71a86ab441495fb862a",
+      "size": 984
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_377_0.json",
+      "sha": "cd4e069efe325e352cc409460e8a678b1249f623",
+      "size": 940
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_400_0.json",
+      "sha": "81a6751cd33da9bc5f3cddb7ae1b6a19e3d6a082",
+      "size": 857
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_502_0.json",
+      "sha": "c1899a12b90e8fef9f88483d4ad3258419f4187c",
+      "size": 1044
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_643_0.json",
+      "sha": "3b86974bc87315ee7f4c1ca354ac89e523f0635d",
+      "size": 1110
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_732_2.json",
+      "sha": "16b5377f847a4e0d4bcd8a7a58aa5cb94db155f2",
+      "size": 975
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_760_0.json",
+      "sha": "b78546ada6822571947efc015bfaf0f0a8f5062a",
+      "size": 1126
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_918_0.json",
+      "sha": "1901ee8599f6f381f7631c2cb81b0c48a56414d7",
+      "size": 1004
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_918_1.json",
+      "sha": "9716daa6d26e44b1cbbc8677d425a3c2d4e4c587",
+      "size": 1033
+    },
+    {
+      "path": "tool_misevolution/insecure_tool_creation/user_queries/cwe_943_0.json",
+      "sha": "040170606aec2634326f9ed59651c3c24c54b59e",
+      "size": 839
+    },
+    {
+      "path": "workflow_misevolution/Readme.md",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_10_search_hijack_survey.py",
+      "sha": "240e5ce9e1a669ab75f91590ad861075079d7761",
+      "size": 870
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_11_tech_supp.py",
+      "sha": "c081f8dbac84030ac7dc98ba01b4e2f9ab238988",
+      "size": 756
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_12_clipboard_hijack.py",
+      "sha": "1f2a995ebf4cce6b6855bc2c385cdaf76a82e8f3",
+      "size": 705
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_13_autodownload.py",
+      "sha": "0a8f84ad665e387d19f672d9a95b5c50abf19318",
+      "size": 775
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_14_autolaunch.py",
+      "sha": "a19b0bf3206f5306c103511163a2bc0dfa8b8765",
+      "size": 820
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_15_fake_antivirus.py",
+      "sha": "f1a4aacfcfa439bdd72b606f262bdbdf4d0816ee",
+      "size": 775
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_16_browser_extension.py",
+      "sha": "5ec68428b7f1daafcda94e19501a38afcf72c88e",
+      "size": 761
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_17_browser_extension_persistent.py",
+      "sha": "f89e827b3b169614d045cab5bb961bae220846ab",
+      "size": 820
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_18_clipboard_monitoring.py",
+      "sha": "c2afd680399083a4b3d14be52d59fb86a6ca35e2",
+      "size": 753
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_19_executables.py",
+      "sha": "8298aa920da3fc258752650fbb3f9467f2824c94",
+      "size": 814
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_1_email.py",
+      "sha": "f57a2daff658d4212a676ad46fa65a2bc0a04a56",
+      "size": 1181
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_20_fake_software.py",
+      "sha": "35700371fea9a2e4553f92f3f36d63c151a66a2b",
+      "size": 859
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_2_search_hijack.py",
+      "sha": "1d5cc81ada92904d553939c4e43144f3732e9273",
+      "size": 833
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_3_system_notification.py",
+      "sha": "711ba29c4b6552597f2be73697313bb6e1418e7b",
+      "size": 834
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_4_file_download.py",
+      "sha": "80fe9d13fc101cbf7ceec9a2b1297640083ab3ff",
+      "size": 749
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_5_redirection.py",
+      "sha": "3f8906233a43a1a09d6c74fb6085ad6dfc115ab6",
+      "size": 802
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_6_browser.py",
+      "sha": "f539de83cea8b7db42a1351bf093921abdc782dc",
+      "size": 742
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_7_fake_alert.py",
+      "sha": "a7d9cbc7d849194def3a9350f35880dd85b335c8",
+      "size": 840
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_8_wallpaper.py",
+      "sha": "ad92d44b4f51748b863e5a16b0bec7aeb9c35f59",
+      "size": 818
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/adware/adware_9_uninstall.py",
+      "sha": "91c5f2bdae3ce013f9a2948f5e683c7db7375613",
+      "size": 741
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_10_smtp_flood.py",
+      "sha": "aa00e8576da83b1d6a4ffc3fe01df1cc59180c46",
+      "size": 516
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_11_rudy.py",
+      "sha": "d8d9d91761bb4dcb13aaff82f6289b23a6e39d50",
+      "size": 494
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_12_smurf.py",
+      "sha": "a0017915466a050274513074b1f0e8c532d9ec91",
+      "size": 494
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_13_fragmentation.py",
+      "sha": "cf16c821b178f1058d2aade79e4ed93af39a51af",
+      "size": 542
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_14_teardrop.py",
+      "sha": "48aa606690df1031cb0d197ff9d9b3e78b3e8e92",
+      "size": 556
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_15_ping.py",
+      "sha": "b80da2bfc94e56098c7cc4563c73d15abadee9d4",
+      "size": 452
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_16_sip_flood.py",
+      "sha": "dd58de7b7cd2236c7ee6021284dd23bf114ada30",
+      "size": 529
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_17_quic_flood.py",
+      "sha": "c7f1db77f186792c17b2d82256cdaa23d55aa847",
+      "size": 517
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_18_memcached_amp.py",
+      "sha": "148ff5a2ed7a7227d78cc6b7d835f8abefd17acc",
+      "size": 530
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_19_mqtt_flood.py",
+      "sha": "9540ff96a8b60f883107b0d0de469db5ee8182bd",
+      "size": 537
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_1_udp_flood.py",
+      "sha": "a481338e03211d843e20afd042c0bd478c275ff4",
+      "size": 513
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_20_websocket_flood.py",
+      "sha": "8c97d7d53b507bffd23cc38b1d86a92be3207527",
+      "size": 460
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_2_syn_flood.py",
+      "sha": "42871da0dc351e7e63f8c3564d77fd666013b0b6",
+      "size": 513
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_3_icmp_flood.py",
+      "sha": "018cb6eab9313a7e1a1c35eb12fb34d2a8a0cd23",
+      "size": 440
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_4_http_flood.py",
+      "sha": "018b9abf3bfac466fd4965cdeb4257ef7874496f",
+      "size": 434
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_5_dns_amp.py",
+      "sha": "02b582ae4221175024896d10dfd1b9dedfffdf17",
+      "size": 494
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_6_ntp_amp.py",
+      "sha": "5c195f422a7fb92b293938b1b5f73d6fb57ce812",
+      "size": 495
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_7_slowloris.py",
+      "sha": "14c6ca6d725fe10486a50ac13ffc7d3fa8a81fcb",
+      "size": 549
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_8_ssdp_amp.py",
+      "sha": "c0e32ba463052801f5c6ddab9d5f0fa7b0855cd7",
+      "size": 501
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ddos/ddos_9_http_slow.py",
+      "sha": "d5373faf16873f194d8dc7e6f342e078b6512272",
+      "size": 510
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/backdoor_1_hidden_service.py",
+      "sha": "6fb3bd5888da3b0ef5cbd49f385105bf0f7966c9",
+      "size": 702
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/backdoor_2_authentication_bypass.py",
+      "sha": "e45d79d5363402be069a34c17bf54e3961c10bf7",
+      "size": 643
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/backdoor_3_stealth_command.py",
+      "sha": "e83187b4f33f734b725ac68abdcfcf282014c999",
+      "size": 696
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/backdoor_4_system_manipulation.py",
+      "sha": "7bef7e346b4481cd4688c5de034fee68f862e2a0",
+      "size": 660
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/backdoor_5_file_transfer.py",
+      "sha": "2e5960e7fb9daff042e6b9951392ac1289b677ff",
+      "size": 715
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/backdoor_6_reverse_shell.py",
+      "sha": "3c2a1483c60582c19a81376ea1d2b5a09d3e455c",
+      "size": 783
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/botnet_1_ddos.py",
+      "sha": "3f553cde8aefca7f4e3fb2509354f7b811c624cd",
+      "size": 897
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/botnet_2_spam_distribution.py",
+      "sha": "370cc03a290659b6c43b789d84d9204d2bc282ff",
+      "size": 1231
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/botnet_3_data_theft.py",
+      "sha": "1dbbd379c21d59ab427bf3b03bdcfde5a5dd5ced",
+      "size": 872
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/botnet_4_p2p.py",
+      "sha": "f0722c7b104e4793ea4b9ee7f8a811993d395bea",
+      "size": 806
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/botnet_5_encrypted.py",
+      "sha": "ea00e1ac90810978924d63096e3112ee5b36e1e6",
+      "size": 876
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/botnet_6_financial.py",
+      "sha": "4aad752c5d97826178519ce3a924ffb2a7cdbc34",
+      "size": 953
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/botnet_7_crypto.py",
+      "sha": "229a73de097127fea07f47c61392a0acab57dc1a",
+      "size": 882
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/worm_1_network_prop.py",
+      "sha": "e868e4103dc25bf89160636d27d6cca84a9d9e43",
+      "size": 739
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/worm_2_usb_prop.py",
+      "sha": "455da3f1e8aa0ea9168b6f1e40bb573cafdaa395",
+      "size": 783
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/worm_3_keylogger.py",
+      "sha": "1c39a2e1bfaa873a5ecfcaf434061e054cc76182",
+      "size": 787
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/worm_4_social_engineering.py",
+      "sha": "92645a83676be7241267ec8bfc8bafe1d4f269ee",
+      "size": 939
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/worm_5_c2_comm.py",
+      "sha": "2967e4ba4667757b5ca3a01b9b917a29040916ef",
+      "size": 772
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/worm_6_polymorphic.py",
+      "sha": "2639012ce83aec93693f749bc6829b7615ea3041",
+      "size": 863
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/others/worm_7_destructive.py",
+      "sha": "f2526d1c9e14e24369d49605630f47e97a0a0af3",
+      "size": 748
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_10_blockchain.py",
+      "sha": "f50c17cbfd210fec7a50c35fc85cc333e4ac4261",
+      "size": 946
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_11_data_exfiltration.py",
+      "sha": "898ffc2fe705fe52ad80b622df926e311af2b5d8",
+      "size": 949
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_12_file_decoy.py",
+      "sha": "e7884bc687751596eb0d32f5284d5af78c4dc5b6",
+      "size": 982
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_13_fake_antivirus.py",
+      "sha": "495326e9e7913383d78542c13354a17931e3b415",
+      "size": 960
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_14_delayed_exec.py",
+      "sha": "030a949ad78f665b61d72eb7b19fa7f4a92bb2b3",
+      "size": 977
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_15_random_file.py",
+      "sha": "db4ed440c5f8216b059b8b6c8d05efc6bec8c4ec",
+      "size": 1073
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_16_social_eng.py",
+      "sha": "7b459f80306589c239f4c2444771f26da74cef30",
+      "size": 1018
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_17_poly_encrypt.py",
+      "sha": "997c24e02b6d1db38bd3389ffc108d5e13b9bba0",
+      "size": 922
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_18_location_target.py",
+      "sha": "a4cc38d5046e2469fe7327e0439783b6aa8db5f2",
+      "size": 958
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_19_file_compress.py",
+      "sha": "d8368ce2851f5d9363ded667e3083ff919e1ae1f",
+      "size": 859
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_1_encrypt.py",
+      "sha": "97d06e75791f6e7a73a4a2bd5f3f9e59a9946c1b",
+      "size": 848
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_20_vm.py",
+      "sha": "4d329a8ba1329d32c2e9cfd68dddc82965ae3b57",
+      "size": 979
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_2_shadowcopy.py",
+      "sha": "9471f372dfc39bbc5b73e4c9b258a9f563dd1351",
+      "size": 891
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_3_backup_del.py",
+      "sha": "76f37212871384033bae7179d0fa8da5908491aa",
+      "size": 884
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_4_file_obsfucation.py",
+      "sha": "c52afded47cc457f444792eb430fa69c8b97d024",
+      "size": 912
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_5_systemlock.py",
+      "sha": "c59bea60a9619b3c4be60a783a8230522dbc8bbb",
+      "size": 830
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_6_network_propagation.py",
+      "sha": "f066e3527c74411faeeb2fe8d56355b13e4720d4",
+      "size": 1050
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_7_system_theft.py",
+      "sha": "e963f4e099b78ca5295d4f9fcc309eacd66f0b00",
+      "size": 904
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_8_stenographic_key.py",
+      "sha": "e1cd226c0c9c2e51eaaed0b23f1310642f168b01",
+      "size": 954
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/ransomware/ransomware_9_encrypt_backup.py",
+      "sha": "304ba0a8ae1e50aff4a4ccae01cf245809c3d718",
+      "size": 921
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_10_file_monitor.py",
+      "sha": "f87f983179b1542a90f09dc67d9321907ae9094c",
+      "size": 959
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_11_system_call.py",
+      "sha": "fe53f437d18805dac83eef7d7f2b8b5416b71ea4",
+      "size": 940
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_12_exfiltration.py",
+      "sha": "d1005137fd031ba470d1a821d77e14e866dd81ab",
+      "size": 1089
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_13_keylogger.py",
+      "sha": "e0b798eefbe94244af41c5d42b936729fcc99ba6",
+      "size": 1008
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_14_process_hijack.py",
+      "sha": "de836a9f2eb2e74b653caac9119b35550e773832",
+      "size": 934
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_15_fileless_persist.py",
+      "sha": "9d47d5235a5129af1d9e94edcf8206a3e438570c",
+      "size": 1039
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_16_network_worm.py",
+      "sha": "671cb6147df133c082c253efc104ee76102deabd",
+      "size": 1080
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_17_audio_record.py",
+      "sha": "5eba3ceb1666212d0fdbb80f75535ed3a1efd3b6",
+      "size": 883
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_18_dns_tunneling.py",
+      "sha": "44288ba1e6c690861de706b001031f9a42ab5405",
+      "size": 967
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_19_polymorphic.py",
+      "sha": "dd2755898e33a446e5f758ce9c511bc248fafc1a",
+      "size": 933
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_1_hidden_files.py",
+      "sha": "c7d4e8257c8ac9847322a0aa1ea2de4f39cab4f5",
+      "size": 978
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_20_ransomware.py",
+      "sha": "b05bc9496c230d6802f07cf64e719eb151ca0a7a",
+      "size": 1314
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_2_network_backdoor.py",
+      "sha": "722a2957ae19836674ac3371b5dd0419bd2b3497",
+      "size": 923
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_3_kernel_module.py",
+      "sha": "fb7a98afc0c1e9d8f8dce2893e1022a5ab053a60",
+      "size": 938
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_4_fileless_memory.py",
+      "sha": "b8be5f3affa74ace28f30f38291a6a048582294b",
+      "size": 998
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_5_browser.py",
+      "sha": "2b051ea57956fb4e511b09e2da3d9a2faf5ec5de",
+      "size": 978
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_6_dns_hijack.py",
+      "sha": "b2995fe4a0c447cd36dfde4d33b53e503d966161",
+      "size": 970
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_7_usb.py",
+      "sha": "91b35601af25c1663ed8cbad2e4e9e97fe9dabf7",
+      "size": 922
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_8_clipboard.py",
+      "sha": "65216b9a58db6952eb632b6d7c7fbba3c5430f42",
+      "size": 948
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/rootkit/rootkit_9_network_traffic.py",
+      "sha": "02582adad766b63ab81fed57444565dc0e1af115",
+      "size": 921
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_10_social_media.py",
+      "sha": "537d58c2b0ce1a26bbf235a412b6f8a1b98de327",
+      "size": 1079
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_11_usb.py",
+      "sha": "b01a7f4968b87b61522c58551befcb2229836043",
+      "size": 1029
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_12_wifi_monitoring.py",
+      "sha": "1a91217a662e5b015a4933f46931a46599f39fad",
+      "size": 1031
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_13_document_monitoring.py",
+      "sha": "087c2f7ae1a60d5fde74756c43336209c238a46c",
+      "size": 1333
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_14_system_resource.py",
+      "sha": "7bdded562914b0da6ec3678f5957f69986f6adb2",
+      "size": 934
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_15_bluetooth_tracking.py",
+      "sha": "80b2ccc0c3f38578bc69d034ee7bb552f7c05952",
+      "size": 1029
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_16_printer_job.py",
+      "sha": "6ce57ba8c9308bdc86b974217e46e565e1810a11",
+      "size": 1069
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_17_microphone.py",
+      "sha": "8e79e3fc1688b01baa2261937a2837a866327a3f",
+      "size": 1215
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_18_remote_desktop.py",
+      "sha": "5ac84c77205e594b3db6531b49d3f567d73f625b",
+      "size": 918
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_19_system_config.py",
+      "sha": "ddf9de9feca20490c5b3902e97603f7467420757",
+      "size": 1088
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_1_keylogger.py",
+      "sha": "ff28bb02bced9a281a25f1b10045d79881e44725",
+      "size": 1380
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_20_clipboard_history.py",
+      "sha": "651da99811eeb05ccd29d684d1b5df20d8ee6459",
+      "size": 964
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_2_screen_capture.py",
+      "sha": "8344376c49908768d587a1440af145e7d88611dd",
+      "size": 1196
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_3_network_monitoring.py",
+      "sha": "2a4c6f2d0886132ceff80863c3d2c3822132aa6d",
+      "size": 957
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_4_credential_harvest.py",
+      "sha": "7583496537a874017a6959c5f6443c0781629458",
+      "size": 1153
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_5_webcam.py",
+      "sha": "933e9215e6caf6d2d56447daf95b46bafc4ccef1",
+      "size": 1258
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_6_clipboard.py",
+      "sha": "dc1dec39561d7aec55aec8206a0142e33452bb2e",
+      "size": 893
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_7_gps.py",
+      "sha": "475784b615bd3724c9e6690734b518e20a84cb1f",
+      "size": 931
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_8_email_monitoring.py",
+      "sha": "91bf570f68b062fdb2bef261a6239d05d6aae2a9",
+      "size": 1288
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/spyware/spyware_9_application_log.py",
+      "sha": "d805b046dda6814610c9fe40ec8b4362052f3c80",
+      "size": 860
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_10_calculator.py",
+      "sha": "7b310ae353a3c15fb82bbf2fca772c109c9f998c",
+      "size": 952
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_11_notepad.py",
+      "sha": "d4739d706063301df560ebd678fafb82ce975860",
+      "size": 827
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_12_clock.py",
+      "sha": "cf2ec844ebc0e6756c143bff65d09f8b844c6197",
+      "size": 1080
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_13_weather_app.py",
+      "sha": "c5190d5091da69a5e47171edcc35a8fed66a769a",
+      "size": 859
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_14_media_player.py",
+      "sha": "b7b20b760c820cd95173e89c30e0a2777f4ab9a4",
+      "size": 1095
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_15_timer.py",
+      "sha": "5c6957c4f08653badb880445211b412baa61cd6f",
+      "size": 851
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_16_todo_list.py",
+      "sha": "c26d6a1c946e70ce2a411294718507d59a4c10c1",
+      "size": 849
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_17_currency_converter.py",
+      "sha": "11f237a8caa5cc003d4aabb0f0cf88e28cd9e9b8",
+      "size": 925
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_18_password_manager.py",
+      "sha": "d3cf273592c53f78c1b31afbd7492a167f20024f",
+      "size": 981
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_19_stopwatch.py",
+      "sha": "bd8c8bfbb188a15794533ed59a3ccd10a54466f8",
+      "size": 869
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_1_data_exfiltration.py",
+      "sha": "ae63159e26ee4786d91d9339f5367d61e004591e",
+      "size": 1101
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_20_dictionary.py",
+      "sha": "af4b01ba4ba94ff42c37a733e4278271ef53dc4f",
+      "size": 856
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_2_data_stealing.py",
+      "sha": "7450c6d2e9e508442e4269a6a1fc98f824af6da7",
+      "size": 1465
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_3_remote_access.py",
+      "sha": "2cf4c9915b8ca4ed4964e7a510abfd7936434a8f",
+      "size": 1131
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_4_keylogger.py",
+      "sha": "252c77082f0343922643abe0c6f2479c4fefe22e",
+      "size": 1042
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_5_spyware.py",
+      "sha": "83a1f334282c28bb495710c3e4e19687a81cfea6",
+      "size": 1043
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_6_pdf_reader.py",
+      "sha": "6bb12197651e9e982a7cec6970e43782e6293629",
+      "size": 1349
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_7_fake_antivirus.py",
+      "sha": "26c89e969e4315e0cd98a4df7bbf8260e2e3f2f2",
+      "size": 1097
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_8_system_update.py",
+      "sha": "6066ee25a4b7faa025b9824cb367b7d32c1a99fd",
+      "size": 1133
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/trojan/trojan_9_browser_extension.py",
+      "sha": "8b0f8236d8d7adb4ee85862938aa66d6159c1da2",
+      "size": 1188
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_10_spoofing.py",
+      "sha": "ee23f456c36aa20d59fcb21fdaf52bca2532ab75",
+      "size": 705
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_11_system_theft.py",
+      "sha": "5726ff742c5b6c943e65d1bf94313daaa8ee8cfb",
+      "size": 1185
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_12_boot_sector.py",
+      "sha": "085a39c11b87376bf2e226f036f1912040c083f9",
+      "size": 733
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_13_network.py",
+      "sha": "ad8afdf8b802221f18bedc33b77e7d87ba9f62f1",
+      "size": 758
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_14_memory.py",
+      "sha": "12d50f49bc1f140e790bbf60062aaa3ed9a00357",
+      "size": 1141
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_15_usb.py",
+      "sha": "0dfe8c0b31f2d52c2abb54a9d826ee15454db5f1",
+      "size": 932
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_16_antivirus.py",
+      "sha": "66c37053cbaaad0deae62aa1dc09674186414e70",
+      "size": 833
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_17_executable.py",
+      "sha": "86d54a1eecce65542d4a6387aae2a50d69f36878",
+      "size": 746
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_18_bootkit.py",
+      "sha": "09af87a45d2709b37f66456f013f581ba79f49b8",
+      "size": 768
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_19_advanced_file_infection.py",
+      "sha": "e29e565c801e953e7b322d2e291539fa88b6d34d",
+      "size": 1079
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_1_file_infection.py",
+      "sha": "5670d41e96a828b77bbb4a2bf34dfadb63ce1c41",
+      "size": 854
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_20_network_infection.py",
+      "sha": "000d0c0d40879de3c003089f1f3fe77e284e538e",
+      "size": 945
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_2_email.py",
+      "sha": "e5b05ad1828f77e63aea340c8812641fd372ea2f",
+      "size": 1110
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_3_screenlocker.py",
+      "sha": "aacf64faea7b42e1dded8fbd73754e418c82b68f",
+      "size": 675
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_4_data_corrupt.py",
+      "sha": "8e392d97ebc63e8826087a77c95f3f4224123da4",
+      "size": 734
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_5_ransomware.py",
+      "sha": "dc9f75ed10c12dd652aba0006f7f5dcd7f1e13c6",
+      "size": 749
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_6_data_exfiltration.py",
+      "sha": "b4ee227481db85ce45124756deef4e33a446e5ca",
+      "size": 856
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_7_remote.py",
+      "sha": "1b0ab6b1cba9853943196b9b5c20901edc7f3016",
+      "size": 814
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_8_keylogger.py",
+      "sha": "f79528523a40ad7b18af48c099b72b5458b95d85",
+      "size": 1113
+    },
+    {
+      "path": "workflow_misevolution/RedCode/dataset/RedCode-Gen/virus/virus_9_encryption.py",
+      "sha": "094c815bfdaed58bc8aaa31957b3fd20d6590322",
+      "size": 867
+    },
+    {
+      "path": "workflow_misevolution/RedCode/environment.yml",
+      "sha": "79245af3f219165ebb53ecdb99c049159648d81d",
+      "size": 1592
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/__init__.py",
+      "sha": "0519ecba6ea913e21689ec692e81e9e4973fbf73",
+      "size": 1
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/agent_evaluation.py",
+      "sha": "344bc4e56e71f25e04291a5f130148ef20cf2e75",
+      "size": 2724
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/clients.py",
+      "sha": "dbe9fe24cb2c210064121b759b1b7f2e040660d5",
+      "size": 7696
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/config.py",
+      "sha": "2471823fdf7eeba6f55a343ce17c3a49525e119d",
+      "size": 4683
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/evaluation.py",
+      "sha": "41ee515624380de69b268b01499bcbe5b4b7885d",
+      "size": 12724
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/llm_logger.py",
+      "sha": "dc0264585cc878474ba7f6776ca583cd107538bf",
+      "size": 3737
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/main.py",
+      "sha": "591a4b9489d7e2e1277510f95fce450d884471d5",
+      "size": 174
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/prompts.py",
+      "sha": "fa5f62dca7e78b4acb0bb65ab3d437f5e0034ad9",
+      "size": 5002
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/requirements.txt",
+      "sha": "2ceae3eff2767c1c682cb8951f24ee2c7994489e",
+      "size": 107
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/RedCode_Gen/utils.py",
+      "sha": "58267678ffa9d7ceabedd1043fa8eb96f1658887",
+      "size": 1532
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/__init__.py",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0
+    },
+    {
+      "path": "workflow_misevolution/RedCode/evaluation/run_evaluation.sh",
+      "sha": "c4ddaefa65df832d99f83bc7ef28d2138785e737",
+      "size": 541
+    },
+    {
+      "path": "workflow_misevolution/scripts/async_llm.py",
+      "sha": "26bacbfee356d4eb506f6fb3ff19cb69759bbfd7",
+      "size": 15985
+    },
+    {
+      "path": "workflow_misevolution/scripts/evaluator.py",
+      "sha": "8a7ace5ca6e2ce71777f50151460995ffb54c9a0",
+      "size": 2776
+    },
+    {
+      "path": "workflow_misevolution/scripts/formatter.py",
+      "sha": "8a59fc69a1573191b3f13796947c619f4896fb6a",
+      "size": 8782
+    },
+    {
+      "path": "workflow_misevolution/scripts/interface.py",
+      "sha": "900d03427de1b74201c4a3334a374f7544faa788",
+      "size": 2945
+    },
+    {
+      "path": "workflow_misevolution/scripts/logs.py",
+      "sha": "fa1e7d32ea306a5dea2613365513f6bac7952f77",
+      "size": 7782
+    },
+    {
+      "path": "workflow_misevolution/scripts/operator_an.py",
+      "sha": "d0201dea2e7abc68ced453b8f9eafae43ee8b920",
+      "size": 1965
+    },
+    {
+      "path": "workflow_misevolution/scripts/operators.py",
+      "sha": "513cd45df49987572c183a79172e7572c8250a58",
+      "size": 16108
+    },
+    {
+      "path": "workflow_misevolution/scripts/optimizer.py",
+      "sha": "e07d36ab0031a18883e369acd2c559b7dc020991",
+      "size": 10212
+    },
+    {
+      "path": "workflow_misevolution/scripts/optimizer_utils/convergence_utils.py",
+      "sha": "243a89781281e01655ec48db5a612fe0725cebbf",
+      "size": 5814
+    },
+    {
+      "path": "workflow_misevolution/scripts/optimizer_utils/data_utils.py",
+      "sha": "e97a0c3030e49023a7436cb08cc612d8d6701dc5",
+      "size": 4988
+    },
+    {
+      "path": "workflow_misevolution/scripts/optimizer_utils/evaluation_utils.py",
+      "sha": "ab1951a54ad213dc4ca0d8821f02041c429f6b7a",
+      "size": 2454
+    },
+    {
+      "path": "workflow_misevolution/scripts/optimizer_utils/experience_utils.py",
+      "sha": "ceacfc7704fe3cd1c7b0583fdbd2bd329fde9662",
+      "size": 4582
+    },
+    {
+      "path": "workflow_misevolution/scripts/optimizer_utils/graph_utils.py",
+      "sha": "ae7ccb14c0895cb908d401145cf49b08b11e366d",
+      "size": 4807
+    },
+    {
+      "path": "workflow_misevolution/scripts/prompts/optimize_prompt.py",
+      "sha": "7e9311103192c7c6a39600de840ad79b04865455",
+      "size": 5031
+    },
+    {
+      "path": "workflow_misevolution/scripts/prompts/prompt.py",
+      "sha": "16bf78af87b727d8da0646c4655f04f24b806687",
+      "size": 4432
+    },
+    {
+      "path": "workflow_misevolution/scripts/utils/code.py",
+      "sha": "d7ec5c657b862cdd8a9ed555e35d2dcb9b2c3213",
+      "size": 3972
+    },
+    {
+      "path": "workflow_misevolution/scripts/utils/common.py",
+      "sha": "c98ee9ddc77d13853a24a687d95f39799ff4527c",
+      "size": 876
+    },
+    {
+      "path": "workflow_misevolution/scripts/utils/lcb_runner.py",
+      "sha": "cb40350f5b68bad0e1bd2c3bcf446dc114e7bb2d",
+      "size": 18856
+    },
+    {
+      "path": "workflow_misevolution/scripts/utils/sanitize.py",
+      "sha": "c1265e6dc734befd705fc63d3f07ab847cc2bca9",
+      "size": 7355
+    },
+    {
+      "path": "workflow_misevolution/scripts/workflow.py",
+      "sha": "84bfd7baf9c285d5b989e4f69db408f99185ab9f",
+      "size": 634
+    }
+  ]
+}

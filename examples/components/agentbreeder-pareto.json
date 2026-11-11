@@ -1,0 +1,7 @@
+{
+  "scaffolds": [
+    {"id": "capability", "capability": 0.9, "safety": 0.5},
+    {"id": "safety", "capability": 0.6, "safety": 0.9},
+    {"id": "dominated", "capability": 0.5, "safety": 0.4}
+  ]
+}

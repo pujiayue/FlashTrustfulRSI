@@ -1,0 +1,31 @@
+--- a/utils/common.py
++++ b/utils/common.py
+@@ -27,6 +27,12 @@
+             except json.JSONDecodeError:
+                 continue  # Skip malformed JSON blocks
+ 
++    if not extracted_jsons:
++        try:
++            value = json.loads(response.strip())
++            if isinstance(value, dict): extracted_jsons.append(value)
++        except json.JSONDecodeError:
++            pass
+     return extracted_jsons if extracted_jsons else None
+ 
+ def file_exist_and_not_empty(file_path):
+--- a/agent/llm_withtools.py
++++ b/agent/llm_withtools.py
+@@ -77,6 +77,13 @@
+         except json.JSONDecodeError:
+             continue  # Skip malformed JSON blocks
+ 
++    if not tool_uses:
++        try:
++            value = json.loads(response.strip())
++            if isinstance(value, dict) and 'tool_name' in value and 'tool_input' in value:
++                tool_uses.append(value)
++        except json.JSONDecodeError:
++            pass
+     return tool_uses if tool_uses else None
+ 
+ def process_tool_call(tools_dict, tool_name, tool_input):

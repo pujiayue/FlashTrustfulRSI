@@ -1,0 +1,8 @@
+{
+  "source_sha256": "d965d83cef7ed299d8c377563482670c4c6af026a4094be24058c425d6dd3ceb",
+  "adapted_sha256": "5da7eaea916b33258be7cd9306b68e3953909e0fa784803d53c867cda89ded04",
+  "modified_files": [
+    "base_agent/src/tools/committee_design.py"
+  ],
+  "change": "all native review-committee model roles use gpt-5.6-sol; no algorithm changes"
+}

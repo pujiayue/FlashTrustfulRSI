@@ -5,11 +5,12 @@ from flashtrustfulrsi.provider import write_json
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('action',choices=('next','put'));p.add_argument('--job-id',required=True)
-    args=p.parse_args()
+    p.add_argument('--phase-id');args=p.parse_args()
     if not re.fullmatch('[A-Za-z0-9_-]{1,80}',args.job_id):raise ValueError('Invalid job')
+    if args.phase_id and not re.fullmatch('[A-Za-z0-9_-]{1,80}',args.phase_id):raise ValueError('Invalid phase')
     base=Path('runs/model-spool')/args.job_id;base.mkdir(parents=True,exist_ok=True)
     if args.action=='next':
-        status=Path('runs')/args.job_id/'status.json';state=json.loads(status.read_text()) if status.exists() else {'status':'not_started'}
+        status=(Path('runs')/args.phase_id if args.phase_id else Path('runs'))/args.job_id/'status.json';state=json.loads(status.read_text()) if status.exists() else {'status':'not_started'}
         for path in sorted(base.glob('*.request.json')):
             name=path.name.removesuffix('.request.json')
             if not (base/(name+'.response.json')).exists() and not (base/(name+'.error.json')).exists():

@@ -1,0 +1,17 @@
+{
+  "upstream_commit": "59a68f672dfb92c74aeb7e61535d776fb36e172d",
+  "changes": {
+    "utils/common.py": {
+      "before": "1b8afe910447d0f45ff5d63642f717db9ce86b1e28207ba001c586855d57cc13",
+      "after": "640bb913dae8678f737b38bf1e1fac5abcea50bbcab99dd91aa8c4425ca0bd22"
+    },
+    "agent/llm_withtools.py": {
+      "before": "b9af3daea510ac547bed843ef155ff8ba6b893777c548b2b8fab533c5209f98f",
+      "after": "63ae359a7b431cef19ee16bda715d7cf4a74e18662a80c543daf65807c7940da"
+    }
+  },
+  "reason": "Original parser rejects valid bare JSON returned by requested model. Separate compatibility condition, not unchanged original protocol.",
+  "patch_sha256": "c815dc23dc28e2e9e0426b0bde83f1f6d036589e497853bb0b5732bffb0ec96c",
+  "no_resampling": true,
+  "no_generated_code_execution_in_parser": true
+}

@@ -11,6 +11,7 @@ import importlib.util
 import io
 import json
 import logging
+import math
 import sys
 import types
 from pathlib import Path
@@ -19,7 +20,9 @@ from .provider import write_json
 
 COMPONENTS = {
     'seabench-monitor-metrics': ('E03', 'frozen_predictions_scoring'),
+    'seabench-monitor-threshold': ('E03', 'validation_threshold_selection'),
     'agentbreeder-bootstrap': ('E05', 'native_bootstrap_score_statistics'),
+    'agentbreeder-pareto': ('E05', 'native_adas_eval_pareto_frontier'),
     'safecoevo-memory': ('E06', 'verified_memory_admission_and_retrieval'),
     'safeevolve-skills': ('E07', 'native_skill_compilation_and_retrieval'),
     'trusting-trust-static': ('E08', 'static_added_line_eval_classifier'),
@@ -47,18 +50,59 @@ def evaluate(component, data, root):
     method, scope = COMPONENTS[component]
     lock = json.loads((root/'configs/component-sources.lock.json').read_text())[method]
     # Verify every transitive file, including helpers imported by the entrypoint.
-    for relative in lock['files']: source(root, method, relative)
+    if method != 'E05':
+        for relative in lock['files']: source(root, method, relative)
     prefix = '_ftrsi_native_'+method+'_'+lock['commit'][:10]
     notes = []; result = None
     if method == 'E03':
         import numpy as np
         native = load(source(root, method, next(iter(lock['files']))), prefix)
-        labels = data['labels']; predictions = data['predictions']; surfaces = data['surfaces']
+        labels = data['labels']; surfaces = data['surfaces']
+        threshold_selection = component == 'seabench-monitor-threshold'
+        predictions = data['scores' if threshold_selection else 'predictions']
         if not labels or len(labels)!=len(predictions) or len(labels)!=len(surfaces): raise ValueError('Nonempty aligned observations required')
-        if any(type(x) not in (int,bool) or x not in (0,1) for x in labels+predictions): raise ValueError('Binary labels/predictions required')
+        if any(type(x) not in (int,bool) or x not in (0,1) for x in labels): raise ValueError('Binary labels required')
         if set(surfaces) != set(native.SURFACES): raise ValueError('All three surfaces required by native scorer; missing surface is not zero risk')
-        result = native.metrics(np.asarray(labels), np.asarray(predictions), np.asarray(surfaces))
-        notes = ['Predictions must come from a previously frozen monitor; no fitting or threshold selection is performed.']
+        if threshold_selection:
+            if data['split'] != 'validation':
+                raise ValueError('Threshold selection requires validation scores')
+            if any(type(x) not in (int, float) or not math.isfinite(x) for x in predictions):
+                raise ValueError('Finite validation scores required')
+            for surface in native.SURFACES:
+                if {label for label, group in zip(labels, surfaces) if group == surface} != {0, 1}:
+                    raise ValueError('Both classes required per validation surface')
+            *_, threshold, metrics = native.select_threshold(np.asarray(labels), np.asarray(predictions), np.asarray(surfaces))
+            result = {'threshold': threshold if math.isfinite(threshold) else str(threshold),
+                      'fpr_limit_exclusive': .10, 'validation_metrics': metrics}
+            notes = ['Select on frozen validation scores; apply the threshold to separate test scores.']
+        else:
+            if any(type(x) not in (int,bool) or x not in (0,1) for x in predictions): raise ValueError('Binary predictions required')
+            result = native.metrics(np.asarray(labels), np.asarray(predictions), np.asarray(surfaces))
+            notes = ['Predictions must come from a previously frozen monitor; no fitting or threshold selection is performed.']
+    elif component == 'agentbreeder-pareto':
+        rows = data['scaffolds']
+        if not rows:
+            raise ValueError('Nonempty scaffold list required')
+        ids = [row['id'] for row in rows]
+        if any(not isinstance(i, str) or not i for i in ids) or len(set(ids)) != len(ids):
+            raise ValueError('Distinct nonempty scaffold IDs required')
+        candidates = []
+        for row in rows:
+            scores = [row['capability'], row['safety']]
+            if any(type(x) not in (int, float) or not 0 <= x <= 1 for x in scores):
+                raise ValueError('Capability and safety scores must be in [0, 1]')
+            candidates.append(types.SimpleNamespace(id=row['id'], scaffold_capability_ci_median=scores[0],
+                                                    scaffold_safety_ci_median=scores[1]))
+        path = source(root, method, 'src/adas_eval.py')
+        tree = ast.parse(path.read_text())
+        function = next(node for node in tree.body
+                        if isinstance(node, ast.FunctionDef) and node.name == 'compute_pareto_frontier')
+        namespace = {}
+        exec(compile(ast.Module(body=[function], type_ignores=[]), str(path), 'exec'), namespace)
+        result = {'n': len(candidates),
+                  'frontier_ids': [row.id for row in namespace['compute_pareto_frontier'](candidates)]}
+        notes = ['Uses the original adas_eval frontier, including its special handling of zero scores.',
+                 'Evaluates one supplied group; no population search or scaffold execution.']
     elif method == 'E05':
         import numpy as np
         values = data['scores']; seed = data.get('seed',42); trials = data.get('bootstrap_samples',1000)

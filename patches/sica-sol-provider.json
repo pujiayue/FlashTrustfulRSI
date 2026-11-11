@@ -1,0 +1,28 @@
+{
+  "upstream_commit": "ed8275dca4d3c5dbf77229964351fe9b424797dc",
+  "published_patch_sha256": "1bd61c8ac1b3fbafa2bdc045b18b44db36f532a3833ec4ae7a2929660d07827e",
+  "patch_sha256": "7f5534dfed7485e347badc72e25cf39342fc4f9f7c659823d2641c6eafc6a9c7",
+  "model": "gpt-5.6-sol",
+  "modified_files": [
+    "base_agent/src/agents/assistant_base_agent.py",
+    "base_agent/src/agents/base_agent.py",
+    "base_agent/src/agents/implementations/review_committee_member.py",
+    "base_agent/src/config.py",
+    "base_agent/src/llm/api.py",
+    "base_agent/src/llm/providers/__init__.py",
+    "base_agent/src/oversight/overseer.py",
+    "base_agent/src/schemas/json_parsing.py",
+    "base_agent/src/types/agent_types.py",
+    "base_agent/src/types/llm_types.py"
+  ],
+  "internal_cost_weights": "placeholder_zero_not_measured_money; native cost monitoring must be disabled",
+  "accounting": "external recorded transport usage; no price claim",
+  "unchanged": [
+    "native Agent.exec",
+    "orchestrator and overseer algorithms",
+    "tool execution and native OpenAI conversion",
+    "meta-improvement reasoning structure",
+    "archive parent selection"
+  ],
+  "scope": "provider integration only; no original algorithm execution or scientific result claimed"
+}
