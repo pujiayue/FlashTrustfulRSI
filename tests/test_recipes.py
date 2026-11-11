@@ -70,3 +70,20 @@ class RecipeTests(unittest.TestCase):
             self.assertTrue(start.call_args.kwargs['start_new_session']);kill.assert_called_once_with(process.pid,9)
             self.assertTrue(receipt['wrapper_timeout']);self.assertFalse(receipt['accepted_development_completion'])
             again=run_prepared(prepared);self.assertTrue(again['idempotent_read']);self.assertFalse(again['accepted_development_completion'])
+
+    def test_sica_resume_does_not_count_copied_source_calls_as_new(self):
+        from unittest.mock import patch
+        from flashtrustfulrsi.recipes import collect_native
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);run=root/'runs/dev-dsflash-sica-twins-example-clean';run.mkdir(parents=True)
+            (run/'manifest.json').write_text(json.dumps({'scope':'development_only_sica_same_model_yaml_twins','model':'deepseek-flash','runs_formal_eval':False,'committed_resume':{'source_job':'old'}}))
+            (run/'status.json').write_text('{"status":"completed"}');(run/'result.json').write_text('{"status":"completed"}')
+            for path in ('evolution/evaluations/0/task/provider','meta-provider/2'):
+                parent=run/path;parent.mkdir(parents=True);(parent/'deepseek-debug.sqlite3').touch()
+            def ledger(parent):
+                count=12 if 'evaluations' in str(parent) else 7
+                return {'model':'deepseek-flash','endpoint':'https://api.deepseek.com/chat/completions','requests':count,'calls':[{'state':'success'}]*count}
+            with patch('flashtrustfulrsi.recipes.ledger_status',side_effect=ledger):result=collect_native(root,run.name)
+            self.assertTrue(result['accepted_development_completion'])
+            self.assertEqual(result['physical_receipts'],7)
+            self.assertEqual(result['reused_source_receipts'],12)

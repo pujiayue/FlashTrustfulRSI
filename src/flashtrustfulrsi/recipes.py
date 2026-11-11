@@ -119,22 +119,29 @@ def collect_native(root,job):
     run=Path(root)/'runs'/job;status_path=run/'status.json';result_path=run/'result.json'
     status=json.loads(status_path.read_text()) if status_path.exists() else {'status':'missing_native_status'}
     ledger_rows=[];unresolved=[]
+    manifest_path=run/'manifest.json'
+    manifest=json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    sica_resume=bool(manifest.get('committed_resume')) and str(manifest.get('scope','')).startswith('development_only_sica_')
     for path in sorted(run.rglob('deepseek-debug.sqlite3')):
         value=ledger_status(path.parent)
         if value['model']!='deepseek-flash' or value['endpoint'] not in OFFICIAL_ENDPOINTS:raise ValueError('Unexpected native provider route')
         if any(row['state']!='success' for row in value['calls']):unresolved.append(str(path))
-        ledger_rows.append({'path':str(path.relative_to(run)),'requests':value['requests'],
+        relative=str(path.relative_to(run))
+        reused=bool(sica_resume and re.match(r'^evolution/evaluations/[01]/',relative))
+        ledger_rows.append({'path':relative,'requests':value['requests'],
+                            'provenance':'reused_committed_source' if reused else 'new_job',
                             'states':sorted({row['state'] for row in value['calls']})})
-    manifest_path=run/'manifest.json'
     if manifest_path.exists():
-        manifest=json.loads(manifest_path.read_text());model=manifest.get('model',manifest.get('settings',{}).get('model'))
+        model=manifest.get('model',manifest.get('settings',{}).get('model'))
         if model!='deepseek-flash' or manifest.get('runs_formal_eval') is not False:raise ValueError('Native manifest is not official developer scope')
     result=json.loads(result_path.read_text()) if result_path.exists() else {}
     completed=(status['status']=='completed' and result.get('status')=='completed' and manifest_path.exists()
                and bool(ledger_rows) and not unresolved)
     return {'native_status':status,'native_result_sha256':digest(result_path) if result_path.exists() else None,
             'native_manifest_sha256':digest(manifest_path) if manifest_path.exists() else None,
-            'ledger_summaries':ledger_rows,'physical_receipts':sum(r['requests'] for r in ledger_rows),
+            'ledger_summaries':ledger_rows,
+            'physical_receipts':sum(r['requests'] for r in ledger_rows if r['provenance']=='new_job'),
+            'reused_source_receipts':sum(r['requests'] for r in ledger_rows if r['provenance']=='reused_committed_source'),
             'unsettled_or_failed_ledgers':unresolved,'accepted_development_completion':completed}
 
 
