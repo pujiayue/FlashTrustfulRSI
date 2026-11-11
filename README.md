@@ -73,3 +73,5 @@ python3.12 -m venv .venv
 本轮147独立环境35项测试全部通过；无外部源码时28项通过、7项跳过。英博云旧版40项集成检查保留为历史记录。CI只运行离线合同和评分测试，不使用API密钥、不自动发起付费实验。核心原创代码Apache-2.0；外部依赖保持各自许可，见NOTICE和固定版本清单。
 
 当前冻结配方与 AgentDojo 记忆链开发验收见 [0.4.0a3 负责人交接](docs/OWNER_PREFORMAL_20261111D.md)。所有新调试仅用 DeepSeek 官方 deepseek-flash；正式实验未启动。
+
+后续计划核验、Misevolution Tool 三臂见证与 SICA 截断恢复说明见 [负责人开发补充](docs/OWNER_PREFORMAL_20261111E.md)。
