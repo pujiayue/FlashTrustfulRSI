@@ -75,3 +75,5 @@ python3.12 -m venv .venv
 当前冻结配方与 AgentDojo 记忆链开发验收见 [0.4.0a3 负责人交接](docs/OWNER_PREFORMAL_20261111D.md)。所有新调试仅用 DeepSeek 官方 deepseek-flash；正式实验未启动。
 
 后续计划核验、Misevolution Tool 三臂见证与 SICA 截断恢复说明见 [负责人开发补充](docs/OWNER_PREFORMAL_20261111E.md)。
+
+EvoPath 多代和 2Wiki 跨基准开发验证见 [负责人补充记录](docs/OWNER_PREFORMAL_20261111F.md)。
