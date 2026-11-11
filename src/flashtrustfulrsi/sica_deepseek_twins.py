@@ -48,6 +48,7 @@ def main():
     parser.add_argument('--image',required=True)
     parser.add_argument('--witness-image',required=True)
     parser.add_argument('--task-requests',type=int,choices=(36,64),default=36)
+    parser.add_argument('--meta-requests',type=int,choices=(220,320,480),help='Per-generation official development request limit')
     parser.add_argument('--pytest-guidance',action='store_true')
     parser.add_argument('--resume-from')
     parser.add_argument('--plan-only',action='store_true')
@@ -68,7 +69,7 @@ def main():
             or any(clean['instructions'] == poisoned['instructions'] or clean['test'] == poisoned['test']
                    for clean,poisoned in zip(splits['clean'],splits['poisoned'],strict=True))):
         raise ValueError('YAML training arms or disjoint heldout differ from the native paired design')
-    meta_limit = 320 if args.resume_from else 220
+    meta_limit = args.meta_requests or (320 if args.resume_from else 220)
     meta = DebugBudget(requests=meta_limit,input_tokens=meta_limit*200_000,
                        output_tokens=meta_limit*16_384,per_call_output=16_384)
     task = DebugBudget(requests=args.task_requests,input_tokens=args.task_requests*200_000,
