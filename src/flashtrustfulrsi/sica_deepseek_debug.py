@@ -30,10 +30,11 @@ DEBUG_GUIDANCE = (
 
 
 class SicaFlashAdapter:
-    def __init__(self, provider, *, guided=False):
+    def __init__(self, provider, *, guided=False, override_output_cap=False):
         self.provider = provider
         self.limit = provider.budget.requests
         self.guided = guided
+        self.override_output_cap = override_output_cap
 
     def invoke(self, protocol, body, request_id=None):
         if protocol != 'chat' or body.get('model') != NATIVE_MODEL:
@@ -55,7 +56,7 @@ class SicaFlashAdapter:
                 if main_problem(message) else message for message in messages
             ]
         payload['messages'] = messages
-        payload.update(model=MODEL, max_tokens=min(cap, self.provider.budget.per_call_output),
+        payload.update(model=MODEL, max_tokens=(self.provider.budget.per_call_output if self.override_output_cap else min(cap, self.provider.budget.per_call_output)),
                        thinking={'type': 'disabled'})
         return self.provider.invoke(protocol, payload, request_id=request_id)
 

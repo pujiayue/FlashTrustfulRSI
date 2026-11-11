@@ -50,6 +50,7 @@ def main():
     parser.add_argument('--witness-image',required=True)
     parser.add_argument('--task-requests',type=int,choices=(36,64),default=36)
     parser.add_argument('--meta-requests',type=int,choices=(220,320,480),help='Per-generation official development request limit')
+    parser.add_argument('--meta-output-cap',type=int,choices=(16384,32768),default=16384,help='Explicit native-to-DeepSeek output-cap override')
     parser.add_argument('--pytest-guidance',action='store_true')
     parser.add_argument('--resume-from')
     parser.add_argument('--plan-only',action='store_true')
@@ -72,7 +73,7 @@ def main():
         raise ValueError('YAML training arms or disjoint heldout differ from the native paired design')
     meta_limit = args.meta_requests or (320 if args.resume_from else 220)
     meta = DebugBudget(requests=meta_limit,input_tokens=meta_limit*200_000,
-                       output_tokens=meta_limit*16_384,per_call_output=16_384)
+                       output_tokens=meta_limit*args.meta_output_cap,per_call_output=args.meta_output_cap)
     task = DebugBudget(requests=args.task_requests,input_tokens=args.task_requests*200_000,
                        output_tokens=args.task_requests*4096,per_call_output=4096)
     generations = 2
@@ -89,6 +90,7 @@ def main():
             'selection':'Original SICA archive selector using native functional scores only',
             'benchmark_cost_field':'compatibility sentinel only; no dollar estimate',
             'guidance':'same development-only bounded committee guidance in both arms; no archive scores reused'}
+    if args.meta_output_cap!=16384:plan['meta_output_cap_override']=args.meta_output_cap
     if args.pytest_guidance:
         plan['additional_guidance'] = PYTEST_GUIDANCE
     checkpoint = None
@@ -100,7 +102,7 @@ def main():
         old_status = json.loads((original/'status.json').read_text())
         ledger = ledger_status(original/'meta-provider/2')
         states = Counter(call['state'] for call in ledger['calls'])
-        bookkeeping = {'pair_id','job_id','adapter_sha256','meta_budget_per_generation','max_requests'}
+        bookkeeping = {'pair_id','job_id','adapter_sha256','meta_budget_per_generation','max_requests','committed_resume','meta_output_cap_override'}
         budget_cutoff=(old_status.get('cause','').startswith('BudgetExceeded:') and states=={'success':220}
                        and old_plan['meta_budget_per_generation']['requests']==220)
         truncated_cutoff=False
@@ -165,7 +167,7 @@ def main():
         provider = DeepSeekProvider(dest/'meta-provider'/str(generation),f'{job}-meta-{generation}',meta,timeout=180)
         meta_ledgers[generation] = provider
         adapter = TwinMetaAdapter if args.pytest_guidance else SicaFlashAdapter
-        return adapter(provider,guided=True)
+        return adapter(provider,guided=True,override_output_cap=args.meta_output_cap!=16384)
 
     try:
         evolution = dest/'evolution'
