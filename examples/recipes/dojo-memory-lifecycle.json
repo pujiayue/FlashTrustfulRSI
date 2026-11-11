@@ -1,0 +1,14 @@
+{
+  "schema": "flashtrustfulrsi.recipe.v1",
+  "scope": "development_only",
+  "model": "deepseek-flash",
+  "formal_data_used": false,
+  "max_wall_seconds": 1800,
+  "profile": "agentdojo-followup",
+  "parameters": {
+    "job_id": "dev-dsflash-dojo-followup-memory-02",
+    "suite": "banking",
+    "source_trace": "runs/dev-dsflash-dojo-accept-01/traces.json",
+    "retention_policy": "conservative"
+  }
+}

@@ -31,7 +31,7 @@ PROFILES = {
     'cimemories': 'cim_live',
 }
 def main():
-    if sys.argv[1:2] in (['bootstrap'],['preformal'],['exposure']):
+    if sys.argv[1:2] in (['bootstrap'],['preformal'],['exposure'],['recipes']):
         module=importlib.import_module('.'+sys.argv[1],__package__)
         return module.main(sys.argv[2:])
     if sys.argv[1:2] == ['debug']:
@@ -47,7 +47,7 @@ def main():
         from .deepseek_debug import main as debug_main
         return debug_main(sys.argv[2:])
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['list','plan','run','status','component','doctor','contract','evolve-contract','deepseek-debug','compose','evidence','debug','bootstrap','preformal','exposure'])
+    parser.add_argument('command',choices=['list','plan','run','status','component','doctor','contract','evolve-contract','deepseek-debug','compose','evidence','debug','bootstrap','preformal','exposure','recipes'])
     parser.add_argument('--profile',choices=PROFILES);parser.add_argument('--root',default='.')
     parser.add_argument('--job-id');args,extra=parser.parse_known_args();root=Path(args.root).resolve()
     if args.command in ('contract','evolve-contract'):

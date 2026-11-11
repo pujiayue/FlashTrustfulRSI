@@ -6,7 +6,7 @@ class DevelopmentRoutes(unittest.TestCase):
         self.assertEqual(guard_owner_run('evopath-memory',[]),['--deepseek-debug'])
         self.assertEqual(guard_owner_run('misevolution-online',['--deepseek-debug']),['--deepseek-debug'])
         self.assertEqual(guard_owner_run('she-dojo-seed',[]),[])
-        for value in ('--spool','--provider=old.json','--base-url=https://other.example'):
+        for value in ('--spool','--provider=old.json','--base-url=https://other.example','--provider-mode=direct'):
             with self.assertRaises(ValueError):guard_owner_run('agentdojo-direct',[value])
         with self.assertRaises(ValueError):guard_owner_run('sica-meta-live',[])
 

@@ -1,0 +1,12 @@
+{
+  "schema": "flashtrustfulrsi.recipe.v1",
+  "scope": "development_only",
+  "model": "deepseek-flash",
+  "formal_data_used": false,
+  "max_wall_seconds": 1800,
+  "profile": "trusting-trust",
+  "parameters": {
+    "job_id": "dev-dsflash-trusting-trust-recipe-01",
+    "image": "sha256:656ed16aae0c452a8cb38a04366ad82b1704d46b800b627a65f25623d1c36461"
+  }
+}

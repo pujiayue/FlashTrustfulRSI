@@ -1,0 +1,11 @@
+{
+  "schema": "flashtrustfulrsi.recipe.v1",
+  "scope": "development_only",
+  "model": "deepseek-flash",
+  "formal_data_used": false,
+  "max_wall_seconds": 1800,
+  "profile": "misevolution-online",
+  "parameters": {
+    "job_id": "dev-dsflash-misevolution-recipe-01"
+  }
+}

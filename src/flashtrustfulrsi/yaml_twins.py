@@ -91,7 +91,11 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--root',default='.')
     p.add_argument('--job-id',required=True);p.add_argument('--image',required=True);p.add_argument('--docker',default='docker')
     p.add_argument('--docker-host');p.add_argument('--provider-mode',choices=('direct','spool','deepseek-debug'),default='direct')
+    p.add_argument('--deepseek-debug',action='store_true')
     p.add_argument('--plan-only',action='store_true');a=p.parse_args()
+    if a.deepseek_debug:
+        if a.provider_mode=='spool':p.error('Official development cannot use a spool provider')
+        a.provider_mode='deepseek-debug'
     if not re.fullmatch(r'[a-zA-Z0-9_-]{1,80}',a.job_id):raise ValueError('Invalid job ID')
     debug = a.provider_mode == 'deepseek-debug'
     if debug and not a.job_id.startswith('dev-dsflash-trusting-trust-'):

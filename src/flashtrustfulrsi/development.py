@@ -23,6 +23,7 @@ ENTRIES = {
  'agentbreeder': ('agentbreeder_population', True),
  'trusting-trust': ('yaml_twins', True),
  'agentdojo': ('dojo_live', True),
+ 'agentdojo-followup': ('dojo_followup', True),
  'seabench-public': ('seabench_public_pairs', False),
  'seabench-monitor': ('seabench_monitor', True),
 }
@@ -31,12 +32,11 @@ LEGACY_OWNER = {
  'sica-yaml-live':'debug run --profile sica',
  'sica-meta-live':'debug run --profile sica',
  'agentbreeder-search-smoke':'debug run --profile agentbreeder',
- 'agentdojo-followup':'debug run --profile agentdojo',
 }
-FLAGGED_OWNER = frozenset({'evopath-memory','agentdojo-direct','flashrsi-transfer','misevolution-service',
+FLAGGED_OWNER = frozenset({'evopath-memory','agentdojo-direct','agentdojo-followup','flashrsi-transfer','misevolution-service',
  'misevolution-online','misevolution-longitudinal','dgm-yaml-native','hyperagents-yaml-native',
  'agentbreeder-population','trusting-trust-yaml-twins','seabench-monitor'})
-FORBIDDEN = frozenset({'--spool','--provider','--model','--base-url','--api-key','--endpoint'})
+FORBIDDEN = frozenset({'--spool','--provider','--model','--base-url','--api-key','--endpoint','--provider-mode'})
 
 
 def official_arguments(arguments):
