@@ -6,6 +6,7 @@ from collections import Counter
 import json
 from pathlib import Path
 import re
+import sqlite3
 from shutil import copytree
 
 from .deepseek_debug import CHAT_URL, MODEL, DebugBudget, DeepSeekProvider, ledger_status
@@ -100,18 +101,32 @@ def main():
         ledger = ledger_status(original/'meta-provider/2')
         states = Counter(call['state'] for call in ledger['calls'])
         bookkeeping = {'pair_id','job_id','adapter_sha256','meta_budget_per_generation','max_requests'}
+        budget_cutoff=(old_status.get('cause','').startswith('BudgetExceeded:') and states=={'success':220}
+                       and old_plan['meta_budget_per_generation']['requests']==220)
+        truncated_cutoff=False
+        if (old_status.get('cause','').startswith('TransportError: Invalid or incomplete DeepSeek response')
+                and states.get('invalid_response')==1 and set(states)<= {'success','invalid_response'}
+                and ledger['calls'] and ledger['calls'][-1]['state']=='invalid_response'):
+            db_path=original/'meta-provider/2/deepseek-debug.sqlite3'
+            with sqlite3.connect(db_path.as_uri()+'?mode=ro',uri=True) as db:
+                row=db.execute('SELECT response FROM calls WHERE call_id=?',
+                               (ledger['calls'][-1]['call_id'],)).fetchone()
+            response=json.loads(row[0]) if row and row[0] else {}
+            truncated_cutoff=(response.get('model')==MODEL and len(response.get('choices',[]))==1
+                              and response['choices'][0].get('finish_reason')=='length')
         if ({key:value for key,value in old_plan.items() if key not in bookkeeping}
                 != {key:value for key,value in plan.items() if key not in bookkeeping}
-                or old_status['status']!='failed' or not old_status.get('cause','').startswith('BudgetExceeded:')
-                or ledger['model']!=MODEL or ledger['endpoint']!=CHAT_URL or ledger['usage_unknown_calls']
-                or states!={'success':220} or old_plan['meta_budget_per_generation']['requests']!=220):
+                or old_status['status']!='failed' or not (budget_cutoff or truncated_cutoff)
+                or ledger['model']!=MODEL or ledger['endpoint']!=CHAT_URL or ledger['usage_unknown_calls']):
             raise ValueError('Original SICA generation-two cutoff is not eligible for this recovery')
         frozen = json.loads((previous/'meta/2/input.json').read_text())
         parent,_ = NativeSelector(source).select(previous/'archive',1)
         review = {'inventory':checkpoint_inventory(previous),'next_parent':parent,
                   'next_input_sha256':sha(json.dumps(frozen,sort_keys=True).encode())}
         plan['committed_resume'] = {'source_job':original.name,'source_generation':1,
-                                    'review':review,'prior_generation_two_successful_requests':220,
+                                    'review':review,'prior_generation_two_successful_requests':states.get('success',0),
+                                    'prior_generation_two_invalid_responses':states.get('invalid_response',0),
+                                    'recovery_cause':'budget_cutoff' if budget_cutoff else 'truncated_terminal_response',
                                     'policy':'reuse the committed first generation; restart only uncommitted generation two'}
         plan['max_requests'] = meta.requests+(len(train_ids)+2*len(splits['heldout']))*task.requests
         protocol = {**json.loads((previous/'manifest.json').read_text())['protocol'],
